@@ -9,6 +9,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,7 +21,9 @@ import java.util.*
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel by viewModels<MainViewModel>()
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModelFactory((application as MotivApplication).transactionRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +40,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainActivityScreen(mainViewModel: MainViewModel) {
-    val transactions = mainViewModel.transactions
-    val addTransaction = { mainViewModel.addTransaction(Transaction(1, Date())) }
+    val transactions by mainViewModel.transactions.observeAsState(emptyList())
+    val addTransaction = {
+        mainViewModel.addTransaction(Transaction(1, Date()))
+        Unit
+    }
     MainScreen(transactions, addTransaction)
 }
 
@@ -54,7 +61,7 @@ fun MainScreen(
                 .padding(innerPadding)
                 .padding(16.dp)
         ) {
-            Balance(transactions.sumBy(Transaction::amount))
+            Balance(transactions.sumOf(Transaction::amount))
             Button(
                 modifier = Modifier.padding(top = 32.dp),
                 onClick = addTransaction,
