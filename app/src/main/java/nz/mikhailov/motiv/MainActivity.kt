@@ -11,11 +11,13 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 import nz.mikhailov.motiv.ui.theme.Typography
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -80,6 +82,7 @@ fun MainScreen(
 
 @Composable
 fun Transactions(transactions: List<Transaction>) {
+    val dateFormat = remember { SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()) }
     LazyColumn(
         modifier = Modifier
             .padding(top = 16.dp)
@@ -87,7 +90,7 @@ fun Transactions(transactions: List<Transaction>) {
             .fillMaxHeight()
     ) {
         items(transactions) { transaction ->
-            Text(text = "${transaction.date} - $${transaction.amount}")
+            Text(text = "${dateFormat.format(transaction.date)} - $${transaction.amount}")
         }
     }
 }
