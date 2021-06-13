@@ -4,15 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DeveloperMode
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.School
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nz.mikhailov.motiv.ui.theme.MotivTheme
@@ -43,8 +50,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainActivityScreen(mainViewModel: MainViewModel) {
     val transactions by mainViewModel.transactions.observeAsState(emptyList())
-    val addTransaction = {
-        mainViewModel.addTransaction(Transaction(1, Date()))
+    val addTransaction = { amount: Int ->
+        mainViewModel.addTransaction(Transaction(amount, Date()))
         Unit
     }
     MainScreen(transactions, addTransaction)
@@ -53,7 +60,7 @@ fun MainActivityScreen(mainViewModel: MainViewModel) {
 @Composable
 fun MainScreen(
     transactions: List<Transaction>,
-    addTransaction: () -> Unit
+    addTransaction: (Int) -> Unit
 ) {
     Scaffold(
         topBar = { MyTopBar() }
@@ -64,11 +71,27 @@ fun MainScreen(
                 .padding(16.dp)
         ) {
             Balance(transactions.sumOf(Transaction::amount))
-            Button(
-                modifier = Modifier.padding(top = 32.dp),
-                onClick = addTransaction,
-            ) {
-                Text(text = "Add $1")
+            Row(
+                Modifier
+                    .padding(top = 32.dp)
+                    .horizontalScroll(rememberScrollState())) {
+                RewardButton(
+                    icon = Icons.Filled.DeveloperMode,
+                    onClick = addTransaction,
+                    rewardAmount = 1
+                )
+                RewardButton(
+                    icon = Icons.Filled.FitnessCenter,
+                    onClick = addTransaction,
+                    rewardAmount = 1,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+                RewardButton(
+                    icon = Icons.Filled.School,
+                    onClick = addTransaction,
+                    rewardAmount = 2,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
             }
             Text(
                 text = "History:",
@@ -77,6 +100,22 @@ fun MainScreen(
             )
             Transactions(transactions = transactions.sortedByDescending(Transaction::date))
         }
+    }
+}
+
+@Composable
+fun RewardButton(
+    modifier: Modifier = Modifier,
+    icon: ImageVector,
+    onClick: (Int) -> Unit,
+    rewardAmount: Int
+) {
+    Button(
+        modifier = modifier,
+        onClick = { onClick(rewardAmount) },
+    ) {
+        Icon(icon, contentDescription = null)
+        Text(text = "Add $${rewardAmount}", Modifier.padding(start = 8.dp))
     }
 }
 
