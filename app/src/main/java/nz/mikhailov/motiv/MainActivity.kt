@@ -37,12 +37,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MotivTheme {
-                // A surface container using the 'background' color from the theme
-                Surface {
-                    MainActivityScreen(mainViewModel)
-                }
-            }
+            App(mainViewModel)
+        }
+    }
+
+}
+
+@Composable
+private fun App(viewModel: MainViewModel) {
+    MotivTheme {
+        // A surface container using the 'background' color from the theme
+        Surface {
+            MainActivityScreen(viewModel)
         }
     }
 }
