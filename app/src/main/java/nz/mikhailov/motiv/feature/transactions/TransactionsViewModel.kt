@@ -1,38 +1,29 @@
 package nz.mikhailov.motiv.feature.transactions
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import nz.mikhailov.motiv.feature.transactions.data.TransactionRepository
-import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
-import java.text.SimpleDateFormat
-import java.util.*
 
 class TransactionsViewModel(
-    private val transactionRepository: TransactionRepository = TransactionRepository(),
+    private val feature: TransactionsFeature = TransactionsFeature(),
 ) : ViewModel() {
 
-    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+    val transactions: LiveData<List<Transaction>> get() = _transactions
+    private val _transactions = MutableLiveData<List<Transaction>>(emptyList())
 
-    val transactions: LiveData<List<Transaction>> = transactionRepository
-        .transactionRecords
-        .map { records ->
-            records.map { record ->
-                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-                (Transaction(
-                    record.amount,
-                    sdf.parse(record.date)
-                ))
+    init {
+        viewModelScope.launch {
+            feature.getLatestTransactions().collect {
+                _transactions.value = it
             }
         }
-        .asLiveData()
+    }
 
-    fun addTransaction(transaction: Transaction) = viewModelScope.launch {
-        transactionRepository.insert(TransactionRecord(sdf.format(transaction.date),
-            transaction.amount))
+    fun deposit(transaction: Transaction) = viewModelScope.launch {
+        feature.deposit(transaction)
     }
 }
