@@ -4,8 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
@@ -30,7 +36,16 @@ private fun App(viewModel: MainViewModel) {
     MotivTheme {
         // A surface container using the 'background' color from the theme
         Surface {
-            TransactionsScreen(viewModel)
+            Scaffold(
+                topBar = { MyTopBar() }
+            ) { innerPadding ->
+                TransactionsScreen(
+                    modifier = Modifier
+                        .padding(innerPadding)
+                        .padding(16.dp),
+                    viewModel = viewModel,
+                )
+            }
         }
     }
 }
