@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import nz.mikhailov.motiv.repository.TransactionRecord
-import nz.mikhailov.motiv.repository.TransactionRecordDao
+import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
+import nz.mikhailov.motiv.feature.transactions.data.LocalTransactionDataStore
 
 @Database(entities = [TransactionRecord::class], version = 1, exportSchema = false)
 abstract class MotivRoomDatabase : RoomDatabase() {
 
-    abstract fun transactionRecordDao(): TransactionRecordDao
+    abstract fun transactionRecordDao(): LocalTransactionDataStore
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

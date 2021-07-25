@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.repository
+package nz.mikhailov.motiv.feature.transactions.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

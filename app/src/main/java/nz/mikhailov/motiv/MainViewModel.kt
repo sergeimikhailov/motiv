@@ -3,8 +3,9 @@ package nz.mikhailov.motiv
 import androidx.lifecycle.*
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import nz.mikhailov.motiv.repository.TransactionRecord
-import nz.mikhailov.motiv.repository.TransactionRepository
+import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
+import nz.mikhailov.motiv.feature.transactions.data.TransactionRepository
+import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +17,10 @@ class MainViewModel(private val transactionRepository: TransactionRepository): V
         .transactionRecords
         .map { records -> records.map { record ->
             @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-            Transaction(record.amount, sdf.parse(record.date))
+            (Transaction(
+        record.amount,
+        sdf.parse(record.date)
+    ))
         } }
         .asLiveData()
 
