@@ -3,7 +3,6 @@ package nz.mikhailov.motiv
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -12,27 +11,25 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: MainViewModel by viewModels {
-        MainViewModelFactory((application as MotivApplication).transactionRepository)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            App(mainViewModel)
+            App()
         }
     }
-
 }
 
 @Composable
-private fun App(viewModel: MainViewModel) {
+private fun App() {
+    val viewModel: MainViewModel = viewModel()
+
     MotivTheme {
         // A surface container using the 'background' color from the theme
         Surface {

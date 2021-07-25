@@ -9,7 +9,9 @@ import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainViewModel(private val transactionRepository: TransactionRepository): ViewModel() {
+class MainViewModel(
+    private val transactionRepository: TransactionRepository = TransactionRepository(),
+): ViewModel() {
 
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
 
