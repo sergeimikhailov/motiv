@@ -20,16 +20,19 @@ class TransactionsViewModel(
 
     val transactions: LiveData<List<Transaction>> = transactionRepository
         .transactionRecords
-        .map { records -> records.map { record ->
-            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-            (Transaction(
-        record.amount,
-        sdf.parse(record.date)
-    ))
-        } }
+        .map { records ->
+            records.map { record ->
+                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+                (Transaction(
+                    record.amount,
+                    sdf.parse(record.date)
+                ))
+            }
+        }
         .asLiveData()
 
     fun addTransaction(transaction: Transaction) = viewModelScope.launch {
-        transactionRepository.insert(TransactionRecord(sdf.format(transaction.date), transaction.amount))
+        transactionRepository.insert(TransactionRecord(sdf.format(transaction.date),
+            transaction.amount))
     }
 }
