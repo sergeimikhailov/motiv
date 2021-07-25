@@ -11,7 +11,9 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
@@ -28,7 +30,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun App() {
-    val viewModel: MainViewModel = viewModel()
+    val navController = rememberNavController()
 
     MotivTheme {
         // A surface container using the 'background' color from the theme
@@ -36,12 +38,15 @@ private fun App() {
             Scaffold(
                 topBar = { MyTopBar() }
             ) { innerPadding ->
-                TransactionsScreen(
-                    modifier = Modifier
-                        .padding(innerPadding)
-                        .padding(16.dp),
-                    viewModel = viewModel,
-                )
+                NavHost(navController = navController, startDestination = "transactions") {
+                    composable("transactions") {
+                        TransactionsScreen(
+                            modifier = Modifier
+                                .padding(innerPadding)
+                                .padding(16.dp),
+                        )
+                    }
+                }
             }
         }
     }
