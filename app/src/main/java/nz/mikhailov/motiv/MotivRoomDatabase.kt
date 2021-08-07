@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 import nz.mikhailov.motiv.feature.transactions.data.LocalTransactionDataStore
 
-@Database(entities = [TransactionRecord::class], version = 1, exportSchema = false)
+@Database(entities = [TransactionRecord::class], version = 1, exportSchema = true)
 abstract class MotivRoomDatabase : RoomDatabase() {
 
     abstract fun transactionRecordDao(): LocalTransactionDataStore
