@@ -2,6 +2,7 @@ package nz.mikhailov.motiv
 
 import android.app.Application
 import androidx.room.RoomDatabase
+import nz.mikhailov.motiv.database.MotivRoomDatabase
 
 interface CoreFacade {
     companion object {

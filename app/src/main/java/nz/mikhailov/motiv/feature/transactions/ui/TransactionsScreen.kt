@@ -20,7 +20,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
 import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
 import nz.mikhailov.motiv.ui.theme.MotivTheme
-import java.util.*
 
 @Composable
 fun TransactionsScreen(
@@ -29,7 +28,7 @@ fun TransactionsScreen(
 ) {
     val transactions by viewModel.transactions.observeAsState(emptyList())
     val addTransaction = { amount: Int ->
-        viewModel.deposit(Transaction(amount, Date()))
+        viewModel.deposit(amount)
         Unit
     }
     TransactionsScreenLayout(modifier, transactions, addTransaction)
@@ -90,7 +89,7 @@ fun TransactionsScreenPreview() {
         Surface {
             TransactionsScreenLayout(
                 modifier = Modifier.padding(16.dp),
-                transactions = listOf(Transaction(1, Date()))
+                transactions = listOf(Transaction(1, "2021-10-07 19:31"))
             ) {}
         }
     }

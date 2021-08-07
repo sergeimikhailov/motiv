@@ -5,25 +5,21 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
 import nz.mikhailov.motiv.ui.theme.MotivTheme
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Composable
 fun Transactions(
     modifier: Modifier = Modifier,
     transactions: List<Transaction>,
 ) {
-    val dateFormat = remember { SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()) }
     LazyColumn(
         modifier = modifier,
     ) {
         items(transactions) { transaction ->
-            Text(text = "${dateFormat.format(transaction.date)} - $${transaction.amount}")
+            Text(text = "${transaction.date} - $${transaction.amount}")
         }
     }
 }
@@ -35,8 +31,8 @@ fun TransactionsPreview() {
         Surface {
             Transactions(
                 transactions = listOf(
-                    Transaction(1, Date()),
-                    Transaction(2, Date()),
+                    Transaction(1, "2021-10-07 19:32"),
+                    Transaction(2, "2021-10-07 19:31"),
                 ),
             )
         }

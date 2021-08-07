@@ -3,7 +3,7 @@ package nz.mikhailov.motiv.feature.transactions.data
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
 import nz.mikhailov.motiv.CoreFacade
-import nz.mikhailov.motiv.MotivRoomDatabase
+import nz.mikhailov.motiv.database.MotivRoomDatabase
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 
 class TransactionRepository(
