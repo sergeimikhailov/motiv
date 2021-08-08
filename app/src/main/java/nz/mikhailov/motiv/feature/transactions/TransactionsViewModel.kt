@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import nz.mikhailov.motiv.Features
 import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
 
 class TransactionsViewModel(
-    private val feature: TransactionsFeature = TransactionsFeature(),
+    private val feature: TransactionsFeature = Features.transactions,
 ) : ViewModel() {
 
     val transactions: LiveData<List<Transaction>> get() = _transactions
