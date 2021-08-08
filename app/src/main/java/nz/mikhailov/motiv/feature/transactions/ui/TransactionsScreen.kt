@@ -27,10 +27,7 @@ fun TransactionsScreen(
     viewModel: TransactionsViewModel = viewModel(),
 ) {
     val transactions by viewModel.transactions.observeAsState(emptyList())
-    val addTransaction = { amount: Int ->
-        viewModel.deposit(amount)
-        Unit
-    }
+    val addTransaction = viewModel::deposit
     TransactionsScreenLayout(modifier, transactions, addTransaction)
 }
 

@@ -24,7 +24,9 @@ class TransactionsViewModel(
         }
     }
 
-    fun deposit(amount: Int) = viewModelScope.launch {
-        feature.deposit(amount)
+    fun deposit(amount: Int) {
+        viewModelScope.launch {
+            feature.deposit(amount)
+        }
     }
 }
