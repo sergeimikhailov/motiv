@@ -1,14 +1,20 @@
 package nz.mikhailov.motiv.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import nz.mikhailov.motiv.feature.transactions.data.LocalTransactionDataStore
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 
-@Database(entities = [TransactionRecord::class], version = 2, exportSchema = true)
+@Database(
+    entities = [
+        TransactionRecord::class,
+    ],
+    version = 3,
+    exportSchema = true,
+    autoMigrations = [
+        AutoMigration(from = 2, to = 3),
+    ],
+)
 @TypeConverters(RoomDatabaseConverters::class)
 abstract class MotivRoomDatabase : RoomDatabase() {
 

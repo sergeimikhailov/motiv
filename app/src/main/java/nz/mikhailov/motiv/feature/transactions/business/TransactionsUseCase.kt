@@ -20,6 +20,6 @@ class TransactionsUseCase(
 
     override suspend fun deposit(amount: Int) = withContext(Dispatchers.IO) {
         transactionRepository
-            .insert(TransactionRecord(Instant.now(), amount))
+            .insert(TransactionRecord(Instant.now(), amount, null))
     }
 }

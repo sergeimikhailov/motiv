@@ -6,10 +6,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeveloperMode
-import androidx.compose.material.icons.filled.FitnessCenter
-import androidx.compose.material.icons.filled.School
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -19,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
+import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @Composable
@@ -47,21 +44,18 @@ fun TransactionsScreenLayout(
                 .horizontalScroll(rememberScrollState())
         ) {
             RewardButton(
-                icon = Icons.Filled.DeveloperMode,
+                reward = RewardUIO.Code(1),
                 onClick = addTransaction,
-                rewardAmount = 1
             )
             RewardButton(
-                icon = Icons.Filled.FitnessCenter,
+                reward = RewardUIO.Exercise(1),
                 onClick = addTransaction,
-                rewardAmount = 1,
-                modifier = Modifier.padding(start = 16.dp)
+                modifier = Modifier.padding(start = 16.dp),
             )
             RewardButton(
-                icon = Icons.Filled.School,
+                reward = RewardUIO.Study(2),
                 onClick = addTransaction,
-                rewardAmount = 2,
-                modifier = Modifier.padding(start = 16.dp)
+                modifier = Modifier.padding(start = 16.dp),
             )
         }
         Text(

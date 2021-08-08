@@ -9,4 +9,5 @@ import java.time.Instant
 data class TransactionRecord(
     @PrimaryKey @ColumnInfo(name = "date") val date: Instant,
     @ColumnInfo(name = "amount") val amount: Int,
+    @ColumnInfo(name = "activity") val activity: String?,
 )
