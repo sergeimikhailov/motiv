@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import nz.mikhailov.motiv.Features
-import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
+import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 
 class TransactionsViewModel(
     private val feature: TransactionsFeature = Features.transactions,

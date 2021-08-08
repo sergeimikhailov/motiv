@@ -2,7 +2,7 @@ package nz.mikhailov.motiv.feature.transactions
 
 import kotlinx.coroutines.flow.Flow
 import nz.mikhailov.motiv.feature.transactions.business.TransactionsUseCase
-import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
+import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 
 interface TransactionsFeature {
     suspend fun getLatestTransactions(): Flow<List<Transaction>>

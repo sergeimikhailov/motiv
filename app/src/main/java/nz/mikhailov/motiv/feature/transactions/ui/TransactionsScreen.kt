@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
-import nz.mikhailov.motiv.feature.transactions.ui.model.Transaction
+import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @Composable
