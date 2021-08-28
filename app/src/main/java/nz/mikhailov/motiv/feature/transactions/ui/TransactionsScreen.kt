@@ -14,8 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
-import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
+import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @Composable
@@ -31,13 +31,13 @@ fun TransactionsScreen(
 @Composable
 fun TransactionsScreenLayout(
     modifier: Modifier = Modifier,
-    transactions: List<Transaction>,
-    addTransaction: (Int) -> Unit,
+    transactions: List<TransactionUIO>,
+    addTransaction: (RewardUIO) -> Unit,
 ) {
     Column(
         modifier = modifier,
     ) {
-        Balance(balance = transactions.sumOf(Transaction::amount))
+        Balance(balance = transactions.sumOf { it.reward.amount })
         Row(
             Modifier
                 .padding(top = 32.dp)
@@ -68,7 +68,7 @@ fun TransactionsScreenLayout(
                 .padding(top = 16.dp)
                 .fillMaxWidth()
                 .fillMaxHeight(),
-            transactions = transactions.sortedByDescending(Transaction::date),
+            transactions = transactions.sortedByDescending(TransactionUIO::date),
         )
     }
 }
@@ -80,7 +80,11 @@ fun TransactionsScreenPreview() {
         Surface {
             TransactionsScreenLayout(
                 modifier = Modifier.padding(16.dp),
-                transactions = listOf(Transaction(1, "2021-10-07 19:31"))
+                transactions = listOf(
+                    TransactionUIO(
+                        reward = RewardUIO.Study(1),
+                        date = "2021-10-07 19:31",
+                    ))
             ) {}
         }
     }

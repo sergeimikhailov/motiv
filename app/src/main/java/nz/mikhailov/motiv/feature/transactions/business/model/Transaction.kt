@@ -4,7 +4,11 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-data class Transaction(val amount: Int, val date: String)
+data class Transaction(
+    val amount: Int,
+    val date: String,
+    val activity: String? = null,
+)
 
 private val dateFormat: DateTimeFormatter = DateTimeFormatter
     .ofPattern("yyyy-MM-dd HH:mm")
@@ -14,4 +18,5 @@ fun TransactionRecord.toBo() =
     Transaction(
         amount = amount,
         date = dateFormat.format(date),
+        activity = activity,
     )

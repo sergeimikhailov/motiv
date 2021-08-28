@@ -6,7 +6,7 @@ import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 
 interface TransactionsFeature {
     suspend fun getLatestTransactions(): Flow<List<Transaction>>
-    suspend fun deposit(amount: Int)
+    suspend fun deposit(amount: Int, activity: String)
 }
 
 class TransactionsFacade private constructor(

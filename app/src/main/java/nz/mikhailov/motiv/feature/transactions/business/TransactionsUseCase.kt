@@ -18,8 +18,12 @@ class TransactionsUseCase(
             .map { records -> records.map(TransactionRecord::toBo) }
     }
 
-    override suspend fun deposit(amount: Int) = withContext(Dispatchers.IO) {
+    override suspend fun deposit(amount: Int, activity: String) = withContext(Dispatchers.IO) {
         transactionRepository
-            .insert(TransactionRecord(Instant.now(), amount, null))
+            .insert(TransactionRecord(
+                date = Instant.now(),
+                amount = amount,
+                activity = activity,
+            ))
     }
 }

@@ -16,11 +16,11 @@ import nz.mikhailov.motiv.ui.theme.MotivTheme
 fun RewardButton(
     modifier: Modifier = Modifier,
     reward: RewardUIO,
-    onClick: (Int) -> Unit,
+    onClick: (RewardUIO) -> Unit,
 ) {
     Button(
         modifier = modifier,
-        onClick = { onClick(reward.amount) },
+        onClick = { onClick(reward) },
     ) {
         Icon(reward.icon, contentDescription = null)
         Text(text = "Add $${reward.amount}", Modifier.padding(start = 8.dp))
