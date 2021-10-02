@@ -4,11 +4,11 @@ import androidx.room.testing.MigrationTestHelper
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert
+import org.junit.Assert.assertArrayEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.Instant
+import java.time.LocalDate.parse
 import java.time.ZoneId
 
 const val TEST_DB = "migration-test"
@@ -34,7 +34,7 @@ class MigrationsTest {
         }
         runMigrationsAndValidate(TEST_DB, 2, true, MIGRATION_1_2).use {
             val offsetMillis =
-                ZoneId.systemDefault().rules.getOffset(Instant.now()).totalSeconds * 1000
+                ZoneId.systemDefault().rules.getOffset(parse("2021-06-12").atStartOfDay()).totalSeconds * 1000
             val result = mutableListOf<Pair<Long, Int>>()
             it.query("SELECT date, amount FROM transactions").use { cursor ->
                 while (cursor.moveToNext()) {
@@ -43,7 +43,7 @@ class MigrationsTest {
                     result.add(Pair(date, amount))
                 }
             }
-            Assert.assertArrayEquals(
+            assertArrayEquals(
                 arrayOf(
                     Pair(1623520740000 - offsetMillis, 1),
                     Pair(1623520920000 - offsetMillis, -11)),
