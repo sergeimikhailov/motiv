@@ -10,8 +10,8 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 @Dao
 interface LocalTransactionDataStore {
 
-    @Query("SELECT * FROM transactions ORDER BY date DESC")
-    fun getTransactions(): Flow<List<TransactionRecord>>
+    @Query("SELECT * FROM transactions ORDER BY date DESC LIMIT :limit")
+    fun getTransactions(limit: Int): Flow<List<TransactionRecord>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(transactionRecord: TransactionRecord)

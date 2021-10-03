@@ -1,18 +1,18 @@
 package nz.mikhailov.motiv.feature.transactions.data
 
 import androidx.annotation.WorkerThread
-import kotlinx.coroutines.flow.Flow
 import nz.mikhailov.motiv.Singletons
-import nz.mikhailov.motiv.database.MotivRoomDatabase
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 
+@Suppress("RedundantSuspendModifier")
 class TransactionRepository(
     private val transactionDataStore: LocalTransactionDataStore = Singletons.roomDatabase.transactionRecordDao(),
 ) {
 
-    val transactionRecords: Flow<List<TransactionRecord>> = transactionDataStore.getTransactions()
+    @WorkerThread
+    suspend fun latestTransactions(limit: Int = 100) =
+        transactionDataStore.getTransactions(limit)
 
-    @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(transactionRecord: TransactionRecord) {
         transactionDataStore.insert(transactionRecord)

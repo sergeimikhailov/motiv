@@ -14,7 +14,7 @@ class TransactionsUseCase(
 ) : TransactionsFeature {
 
     override suspend fun getLatestTransactions() = withContext(Dispatchers.IO) {
-        transactionRepository.transactionRecords
+        transactionRepository.latestTransactions(limit = 100)
             .map { records -> records.map(TransactionRecord::toBo) }
     }
 
