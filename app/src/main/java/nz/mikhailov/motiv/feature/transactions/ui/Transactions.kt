@@ -18,6 +18,7 @@ import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
 import nz.mikhailov.motiv.ui.theme.Green
 import nz.mikhailov.motiv.ui.theme.MotivTheme
+import nz.mikhailov.motiv.util.formatAsCurrency
 
 @Composable
 fun Transactions(
@@ -51,13 +52,15 @@ private fun TransactionItem(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                imageVector = transaction.reward.icon,
-                contentDescription = null, // decorative
-            )
+            if (transaction.reward.amount > 0) {
+                Icon(
+                    imageVector = transaction.reward.icon,
+                    contentDescription = null, // decorative
+                )
+            }
             Text(
                 modifier = Modifier.padding(start = 16.dp),
-                text = "$${transaction.reward.amount}",
+                text = transaction.reward.amount.formatAsCurrency(),
                 color = Green,
             )
         }
@@ -72,13 +75,17 @@ fun TransactionsPreview() {
             Transactions(
                 transactions = listOf(
                     TransactionUIO(
+                        reward = RewardUIO.Unknown(-3),
+                        date = "3 October 2021 13:16",
+                    ),
+                    TransactionUIO(
                         reward = RewardUIO.Exercise(1),
-                        date = "8 August 2021 13:24"
+                        date = "8 August 2021 13:24",
                     ),
                     TransactionUIO(
                         reward = RewardUIO.Study(2),
-                        date = "23 July 2021 19:31"
-                    ),
+                        date = "23 July 2021 19:31",
+                    )
                 ),
             )
         }

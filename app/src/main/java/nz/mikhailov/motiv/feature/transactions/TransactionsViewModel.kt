@@ -39,4 +39,10 @@ class TransactionsViewModel(
             )
         }
     }
+
+    fun withdraw(amount: Int) {
+        viewModelScope.launch {
+            feature.withdraw(amount)
+        }
+    }
 }

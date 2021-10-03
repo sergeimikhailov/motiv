@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 import nz.mikhailov.motiv.ui.theme.Typography
+import nz.mikhailov.motiv.util.formatAsCurrency
 
 @Composable
 fun Balance(modifier: Modifier = Modifier, balance: Int) {
@@ -15,7 +16,7 @@ fun Balance(modifier: Modifier = Modifier, balance: Int) {
         modifier = modifier,
     ) {
         Text("Total is: ", style = Typography.h3)
-        Text("$${balance}", style = Typography.h3)
+        Text(balance.formatAsCurrency(), style = Typography.h3)
     }
 }
 

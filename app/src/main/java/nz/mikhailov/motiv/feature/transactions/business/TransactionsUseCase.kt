@@ -12,7 +12,7 @@ import java.time.Instant
 class TransactionsUseCase(
     private val transactionRepository: TransactionRepository = TransactionRepository(),
 ) : TransactionsFeature {
-    
+
     override suspend fun getLatestTransactions() = withContext(Dispatchers.IO) {
         transactionRepository.transactionRecords
             .map { records -> records.map(TransactionRecord::toBo) }
@@ -24,6 +24,17 @@ class TransactionsUseCase(
                 date = Instant.now(),
                 amount = amount,
                 activity = activity,
+            ))
+    }
+
+    override suspend fun withdraw(amount: Int) = withContext(Dispatchers.IO) {
+        if (amount <= 0) {
+            return@withContext
+        }
+        transactionRepository
+            .insert(TransactionRecord(
+                date = Instant.now(),
+                amount = -amount,
             ))
     }
 }
