@@ -7,6 +7,6 @@ class MotivApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        CoreFacade.init(this)
+        Singletons.init(this)
     }
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.RoomDatabase
 import nz.mikhailov.motiv.database.MotivRoomDatabase
 
-interface CoreFacade {
+interface Singletons {
     companion object {
 
         private lateinit var context: Application
@@ -13,7 +13,7 @@ interface CoreFacade {
             this.context = context
         }
 
-        val roomDatabase: RoomDatabase
-            get() = MotivRoomDatabase.getDatabase(context = context)
+        val roomDatabase: MotivRoomDatabase
+            get() = MotivRoomDatabase.getDatabase(context = context) as MotivRoomDatabase
     }
 }
