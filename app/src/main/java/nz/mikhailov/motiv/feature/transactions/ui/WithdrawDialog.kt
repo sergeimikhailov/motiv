@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,7 +47,9 @@ private fun WithdrawDialogInternalLayout(
         modifier = modifier,
     ) {
         TextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { contentDescription = "Amount to withdraw" },
             value = value,
             onValueChange = setValue,
             keyboardOptions = KeyboardOptions(
@@ -58,7 +62,9 @@ private fun WithdrawDialogInternalLayout(
             horizontalArrangement = Arrangement.Center,
         ) {
             Button(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .semantics { contentDescription = "Confirm withdraw" },
                 onClick = { onConfirm(value.toIntOrNull() ?: 0) },
             ) {
                 Text(text = "Withdraw")

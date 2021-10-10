@@ -57,22 +57,30 @@ fun TransactionsScreenLayout(
                 .horizontalScroll(rememberScrollState())
         ) {
             RewardButton(
+                modifier = Modifier
+                    .semantics { contentDescription = "Add coding reward" },
                 reward = RewardUIO.Code(1),
                 onClick = addTransaction,
             )
             RewardButton(
-                modifier = Modifier.padding(start = 16.dp),
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .semantics { contentDescription = "Add exercise reward" },
                 reward = RewardUIO.Exercise(1),
                 onClick = addTransaction,
             )
             RewardButton(
-                modifier = Modifier.padding(start = 16.dp),
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .semantics { contentDescription = "Add study reward" },
                 reward = RewardUIO.Study(2),
                 onClick = addTransaction,
             )
         }
         Button(
-            modifier = Modifier.padding(top = 32.dp),
+            modifier = Modifier
+                .padding(top = 32.dp)
+                .semantics { contentDescription = "Withdraw" },
             onClick = {
                 showWithdrawDialog.value = true
             },
