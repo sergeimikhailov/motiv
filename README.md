@@ -9,3 +9,4 @@ The idea behind the app is similar to a piggy bank.
 Keeping records of rewards in exchange for positive actions.
 The accumulated amount can be withdrawn later and spent on something like a hobby :)
 
+<img src="/screenshots/transactions.png" width="260">&emsp;<img src="/screenshots/withdraw.png" width="260">
