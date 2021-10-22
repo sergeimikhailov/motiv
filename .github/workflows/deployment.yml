@@ -1,0 +1,10 @@
+name: Deployment
+
+concurrency: staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: ./.github/workflows/main.yml@main
