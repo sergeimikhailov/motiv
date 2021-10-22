@@ -10,6 +10,7 @@ jobs:
     uses: sergeimikhailov/motiv/.github/workflows/main.yml@main
 
   deploy:
+    needs: test
     runs-on: macos-latest
     steps:
       - name: checkout
