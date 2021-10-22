@@ -7,4 +7,4 @@ on:
 
 jobs:
   test:
-    uses: ./.github/workflows/main.yml@main
+    uses: sergeimikhailov/motiv/.github/workflows/main.yml@main
