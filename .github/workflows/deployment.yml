@@ -8,3 +8,20 @@ on:
 jobs:
   test:
     uses: sergeimikhailov/motiv/.github/workflows/main.yml@main
+
+  deploy:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Java 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: build
+        run: >-
+          ./gradlew bundleRelease
+          -Pandroid.injected.version.code=${{ env.GITHUB_RUN_NUMBER }}
+          -Pandroid.injected.version.name=${{ env.GITHUB_SHA }}
