@@ -23,5 +23,5 @@ jobs:
       - name: build
         run: >-
           ./gradlew bundleRelease
-          -Pandroid.injected.version.code=${{ env.GITHUB_RUN_NUMBER }}
-          -Pandroid.injected.version.name=${{ env.GITHUB_SHA }}
+          -Pandroid.injected.version.code=${GITHUB_RUN_NUMBER}
+          -Pandroid.injected.version.name=${GITHUB_SHA}
