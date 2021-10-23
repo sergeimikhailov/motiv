@@ -12,6 +12,7 @@ jobs:
   deploy:
     needs: test
     runs-on: macos-latest
+    environment: staging
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -26,3 +27,21 @@ jobs:
           ./gradlew bundleRelease
           -Pandroid.injected.version.code=${GITHUB_RUN_NUMBER}
           -Pandroid.injected.version.name=${GITHUB_SHA}
+
+      - name: sign
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.KEY_STORE }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: upload
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: nz.mikhailov.motiv
+          releaseFile: ${{ SIGNED_RELEASE_FILE }}
+          track: internal
+          mappingFile: app/build/outputs/mapping/release/mapping.txt
