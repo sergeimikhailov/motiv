@@ -22,13 +22,13 @@ jobs:
         with:
           java-version: 11
 
-      - name: build
+      - name: Build
         run: >-
           ./gradlew bundleRelease
           -Pandroid.injected.version.code=${GITHUB_RUN_NUMBER}
           -Pandroid.injected.version.name=${GITHUB_SHA}
 
-      - name: sign
+      - name: Sign
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/bundle/release
@@ -37,8 +37,8 @@ jobs:
           alias: ${{ secrets.KEY_ALIAS }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: upload
-        uses: r0adkll/upload-google-play@v1
+      - name: Upload
+        uses: r0adkll/upload-google-play@v1.0.15
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: nz.mikhailov.motiv
