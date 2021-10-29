@@ -26,7 +26,7 @@ jobs:
         run: >-
           ./gradlew bundleRelease
           -Pandroid.injected.version.code=${GITHUB_RUN_NUMBER}
-          -Pandroid.injected.version.name=${GITHUB_SHA}
+          -Pandroid.injected.version.name=${GITHUB_SHA::7}
 
       - name: Sign
         uses: r0adkll/sign-android-release@v1
@@ -54,6 +54,6 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/release/v${GITHUB_RUN_NUMBER}",
+              ref: "refs/tags/release/v${{ github.run_number }}",
               sha: context.sha
             })
