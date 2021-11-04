@@ -45,10 +45,12 @@ fun TransactionsScreenLayout(
 ) {
     val showWithdrawDialog = remember { mutableStateOf(false) }
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(top = 16.dp),
     ) {
         Balance(
-            modifier = Modifier.semantics { contentDescription = "Current balance" },
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .semantics { contentDescription = "Current balance" },
             balance = transactions.sumOf { it.reward.amount },
         )
         Row(
@@ -58,6 +60,7 @@ fun TransactionsScreenLayout(
         ) {
             RewardButton(
                 modifier = Modifier
+                    .padding(start = 16.dp)
                     .semantics { contentDescription = "Add coding reward" },
                 reward = RewardUIO.Code(1),
                 onClick = addTransaction,
@@ -71,7 +74,7 @@ fun TransactionsScreenLayout(
             )
             RewardButton(
                 modifier = Modifier
-                    .padding(start = 16.dp)
+                    .padding(horizontal = 16.dp)
                     .semantics { contentDescription = "Add study reward" },
                 reward = RewardUIO.Study(2),
                 onClick = addTransaction,
@@ -80,6 +83,7 @@ fun TransactionsScreenLayout(
         Button(
             modifier = Modifier
                 .padding(top = 32.dp)
+                .padding(horizontal = 16.dp)
                 .semantics { contentDescription = "Withdraw" },
             onClick = {
                 showWithdrawDialog.value = true
@@ -91,13 +95,16 @@ fun TransactionsScreenLayout(
             Text(text = "Withdraw...")
         }
         Text(
-            modifier = Modifier.padding(top = 32.dp),
+            modifier = Modifier
+                .padding(top = 32.dp)
+                .padding(horizontal = 16.dp),
             text = "History:",
             style = MaterialTheme.typography.headlineMedium,
         )
         Transactions(
             modifier = Modifier
                 .padding(top = 16.dp)
+                .padding(horizontal = 16.dp)
                 .fillMaxWidth()
                 .fillMaxHeight(),
             transactions = transactions.sortedByDescending(TransactionUIO::date),
@@ -122,7 +129,6 @@ fun TransactionsScreenPreview() {
     MotivTheme {
         Surface {
             TransactionsScreenLayout(
-                modifier = Modifier.padding(16.dp),
                 transactions = listOf(
                     TransactionUIO(
                         reward = RewardUIO.Study(1),
