@@ -3,7 +3,7 @@ package nz.mikhailov.motiv.feature.transactions.ui
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -85,7 +85,7 @@ fun TransactionsScreenLayout(
                 showWithdrawDialog.value = true
             },
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = MaterialTheme.colors.secondary,
+                containerColor = MaterialTheme.colorScheme.secondary,
             ),
         ) {
             Text(text = "Withdraw...")
@@ -93,7 +93,7 @@ fun TransactionsScreenLayout(
         Text(
             modifier = Modifier.padding(top = 32.dp),
             text = "History:",
-            style = MaterialTheme.typography.h5,
+            style = MaterialTheme.typography.headlineMedium,
         )
         Transactions(
             modifier = Modifier
@@ -116,7 +116,7 @@ fun TransactionsScreenLayout(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun TransactionsScreenPreview() {
     MotivTheme {

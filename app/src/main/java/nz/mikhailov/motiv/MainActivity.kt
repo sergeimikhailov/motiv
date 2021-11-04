@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -28,16 +25,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun App() {
     val navController = rememberNavController()
 
     MotivTheme {
-        // A surface container using the 'background' color from the theme
         Surface {
-            Scaffold(
-                topBar = { MyTopBar() }
-            ) { innerPadding ->
+            Scaffold { innerPadding ->
                 NavHost(navController = navController, startDestination = "transactions") {
                     composable("transactions") {
                         TransactionsScreen(
@@ -50,11 +45,4 @@ private fun App() {
             }
         }
     }
-}
-
-@Composable
-fun MyTopBar() {
-    TopAppBar(
-        title = { Text("Motiv") },
-    )
 }
