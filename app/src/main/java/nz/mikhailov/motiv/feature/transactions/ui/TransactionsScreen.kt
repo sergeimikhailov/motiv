@@ -107,7 +107,7 @@ fun TransactionsScreenLayout(
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
                 .fillMaxHeight(),
-            transactions = transactions.sortedByDescending(TransactionUIO::date),
+            transactions = transactions,
         )
         if (showWithdrawDialog.value) {
             WithdrawDialog(
