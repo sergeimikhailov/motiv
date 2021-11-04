@@ -132,7 +132,7 @@ fun TransactionsScreenPreview() {
                 transactions = listOf(
                     TransactionUIO(
                         reward = RewardUIO.Study(1),
-                        date = "2021-10-07 19:31",
+                        date = "7 October 2021 at 7:31 pm",
                     )),
                 addTransaction = {},
                 withdraw = {},

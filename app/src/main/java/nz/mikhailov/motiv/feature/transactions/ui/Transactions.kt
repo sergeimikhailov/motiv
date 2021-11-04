@@ -76,15 +76,15 @@ fun TransactionsPreview() {
                 transactions = listOf(
                     TransactionUIO(
                         reward = RewardUIO.Unknown(-3),
-                        date = "3 October 2021 13:16",
+                        date = "3 October 2021 at 1:16 pm",
                     ),
                     TransactionUIO(
                         reward = RewardUIO.Exercise(1),
-                        date = "8 August 2021 13:24",
+                        date = "8 August 2021 at 1:24 pm",
                     ),
                     TransactionUIO(
                         reward = RewardUIO.Study(2),
-                        date = "23 July 2021 19:31",
+                        date = "23 July 2021 at 7:31 am",
                     )
                 ),
             )
