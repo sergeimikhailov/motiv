@@ -1,11 +1,12 @@
 package nz.mikhailov.motiv.feature.transactions.ui
 
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
+import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 import org.junit.Rule
 import org.junit.Test
@@ -31,10 +32,17 @@ class TransactionsScreensComposeTest {
     fun shouldAddBalance(): Unit = with(composeTestRule) {
         setContent {
             MotivTheme {
-                val transactions = remember { mutableStateListOf<TransactionUIO>() }
+                val initialState = TransactionsUIO(balance = 0, transactions = emptyList())
+                val (transactions, setTransactions) = remember { mutableStateOf(initialState) }
                 TransactionsScreenLayout(
                     transactions = transactions,
-                    addTransaction = { transactions.add(TransactionUIO(it, "")) },
+                    addTransaction = {
+                        setTransactions(TransactionsUIO(
+                            balance = transactions.balance + it.amount,
+                            transactions = transactions.transactions
+                                    + TransactionUIO(it, ""),
+                        ))
+                    },
                     withdraw = { },
                 )
             }
@@ -52,12 +60,21 @@ class TransactionsScreensComposeTest {
     fun shouldWithdrawBalance(): Unit = with(composeTestRule) {
         setContent {
             MotivTheme {
-                val transactions = remember { mutableStateListOf(
-                    TransactionUIO(RewardUIO.Study(10), "")) }
+                val initialState = TransactionsUIO(
+                    balance = 10,
+                    transactions = listOf(TransactionUIO(RewardUIO.Study(10), "")),
+                )
+                val (transactions, setTransactions) = remember { mutableStateOf(initialState) }
                 TransactionsScreenLayout(
                     transactions = transactions,
                     addTransaction = { },
-                    withdraw = { transactions.add(TransactionUIO(RewardUIO.Unknown(-it), "")) },
+                    withdraw = {
+                        setTransactions(TransactionsUIO(
+                            balance = transactions.balance - it,
+                            transactions = transactions.transactions
+                                    + TransactionUIO(RewardUIO.Unknown(-it), ""),
+                        ))
+                    },
                 )
             }
         }

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import nz.mikhailov.motiv.Features
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
-import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
+import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.toUIO
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -18,8 +18,8 @@ class TransactionsViewModel(
     private val feature: TransactionsFeature = Features.transactions,
 ) : ViewModel() {
 
-    val transactions: LiveData<List<TransactionUIO>> get() = _transactions
-    private val _transactions = MutableLiveData<List<TransactionUIO>>(emptyList())
+    val transactions: LiveData<TransactionsUIO> get() = _transactions
+    private val _transactions = MutableLiveData<TransactionsUIO>()
 
     init {
         viewModelScope.launch {

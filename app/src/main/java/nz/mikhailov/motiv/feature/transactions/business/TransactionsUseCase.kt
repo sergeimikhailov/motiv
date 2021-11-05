@@ -10,21 +10,22 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 import java.time.Instant
 
 class TransactionsUseCase(
-    private val transactionRepository: TransactionRepository = TransactionRepository(),
+    private val repository: TransactionRepository = TransactionRepository(),
 ) : TransactionsFeature {
 
     override suspend fun getLatestTransactions() = withContext(Dispatchers.IO) {
-        transactionRepository.latestTransactions(limit = 100)
+        repository.latestTransactions(limit = 100)
             .map { records -> records.map(TransactionRecord::toBo) }
     }
 
     override suspend fun deposit(amount: Int, activity: String) = withContext(Dispatchers.IO) {
-        transactionRepository
+        val balance = repository.latestTransaction()?.balance ?: 0
+        repository
             .insert(TransactionRecord(
                 date = Instant.now(),
                 amount = amount,
                 activity = activity,
-                balance = 0, // todo
+                balance = balance + amount,
             ))
     }
 
@@ -32,11 +33,12 @@ class TransactionsUseCase(
         if (amount <= 0) {
             return@withContext
         }
-        transactionRepository
+        val balance = repository.latestTransaction()?.balance ?: 0
+        repository
             .insert(TransactionRecord(
                 date = Instant.now(),
                 amount = -amount,
-                balance = 0, // todo
+                balance = balance - amount,
             ))
     }
 }

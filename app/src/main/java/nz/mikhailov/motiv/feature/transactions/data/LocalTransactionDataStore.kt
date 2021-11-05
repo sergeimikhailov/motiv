@@ -11,7 +11,10 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 interface LocalTransactionDataStore {
 
     @Query("SELECT * FROM transactions ORDER BY date DESC LIMIT :limit")
-    fun getTransactions(limit: Int): Flow<List<TransactionRecord>>
+    fun read(limit: Int): Flow<List<TransactionRecord>>
+
+    @Query("SELECT * FROM transactions ORDER BY date DESC LIMIT 1")
+    suspend fun readLatest(): TransactionRecord?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(transactionRecord: TransactionRecord)

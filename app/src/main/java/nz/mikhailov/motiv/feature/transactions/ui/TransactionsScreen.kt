@@ -18,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
+import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @Composable
@@ -25,7 +26,7 @@ fun TransactionsScreen(
     modifier: Modifier = Modifier,
     viewModel: TransactionsViewModel = viewModel(),
 ) {
-    val transactions by viewModel.transactions.observeAsState(emptyList())
+    val transactions by viewModel.transactions.observeAsState(TransactionsUIO(balance = 0, transactions = emptyList()))
     val addTransaction = viewModel::deposit
     val withdraw = viewModel::withdraw
     TransactionsScreenLayout(
@@ -39,7 +40,7 @@ fun TransactionsScreen(
 @Composable
 fun TransactionsScreenLayout(
     modifier: Modifier = Modifier,
-    transactions: List<TransactionUIO>,
+    transactions: TransactionsUIO,
     addTransaction: (RewardUIO) -> Unit,
     withdraw: (Int) -> Unit,
 ) {
@@ -51,7 +52,7 @@ fun TransactionsScreenLayout(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .semantics { contentDescription = "Current balance" },
-            balance = transactions.sumOf { it.reward.amount },
+            balance = transactions.balance,
         )
         Row(
             Modifier
@@ -107,7 +108,7 @@ fun TransactionsScreenLayout(
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
                 .fillMaxHeight(),
-            transactions = transactions,
+            transactions = transactions.transactions,
         )
         if (showWithdrawDialog.value) {
             WithdrawDialog(
@@ -129,11 +130,15 @@ fun TransactionsScreenPreview() {
     MotivTheme {
         Surface {
             TransactionsScreenLayout(
-                transactions = listOf(
-                    TransactionUIO(
-                        reward = RewardUIO.Study(1),
-                        date = "7 October 2021 at 7:31 pm",
-                    )),
+                transactions = TransactionsUIO(
+                    balance = 1,
+                    transactions = listOf(
+                        TransactionUIO(
+                            reward = RewardUIO.Study(1),
+                            date = "7 October 2021 at 7:31 pm",
+                        )
+                    ),
+                ),
                 addTransaction = {},
                 withdraw = {},
             )

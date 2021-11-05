@@ -9,6 +9,7 @@ data class Transaction(
     val amount: Int,
     val date: String,
     val activity: String? = null,
+    val balance: Int,
 )
 
 private val defaultFormatter: DateTimeFormatter = DateTimeFormatter
@@ -20,4 +21,5 @@ fun TransactionRecord.toBo(formatter: DateTimeFormatter = defaultFormatter) =
         amount = amount,
         date = formatter.format(date),
         activity = activity,
+        balance = balance,
     )

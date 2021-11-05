@@ -26,6 +26,7 @@ class TransactionKtTest {
             amount = 10,
             date = "2021-10-09 19:21",
             activity = "activity",
+            balance = 25,
         ))
     }
 }

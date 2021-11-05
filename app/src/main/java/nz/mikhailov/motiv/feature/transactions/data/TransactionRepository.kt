@@ -7,13 +7,14 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 @Suppress("RedundantSuspendModifier")
 @WorkerThread
 class TransactionRepository(
-    private val transactionDataStore: LocalTransactionDataStore = Singletons.roomDatabase.transactionRecordDao(),
+    private val dataStore: LocalTransactionDataStore = Singletons.roomDatabase.transactionRecordDao(),
 ) {
 
-    suspend fun latestTransactions(limit: Int = 100) =
-        transactionDataStore.getTransactions(limit)
+    suspend fun latestTransactions(limit: Int = 100) = dataStore.read(limit)
+
+    suspend fun latestTransaction() = dataStore.readLatest()
 
     suspend fun insert(transactionRecord: TransactionRecord) {
-        transactionDataStore.insert(transactionRecord)
+        dataStore.insert(transactionRecord)
     }
 }

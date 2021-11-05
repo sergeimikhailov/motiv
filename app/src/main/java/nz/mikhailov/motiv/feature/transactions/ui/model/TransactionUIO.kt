@@ -11,5 +11,3 @@ fun Transaction.toUIO() = TransactionUIO(
     reward = toRewardUIO(),
     date = date,
 )
-
-fun List<Transaction>.toUIO() = map(Transaction::toUIO)
