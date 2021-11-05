@@ -9,7 +9,7 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
     entities = [
         TransactionRecord::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
@@ -36,6 +36,7 @@ abstract class MotivRoomDatabase : RoomDatabase() {
                         MotivRoomDatabase::class.java,
                         "motiv_database")
                     .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_3_4)
                     .build()
                 INSTANCE = instance
                 // return instance

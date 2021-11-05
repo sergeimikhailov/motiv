@@ -10,4 +10,5 @@ data class TransactionRecord(
     @PrimaryKey @ColumnInfo(name = "date") val date: Instant,
     @ColumnInfo(name = "amount") val amount: Int,
     @ColumnInfo(name = "activity") val activity: String? = null,
+    @ColumnInfo(name = "balance") val balance: Int,
 )

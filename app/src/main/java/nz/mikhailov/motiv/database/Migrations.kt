@@ -2,6 +2,7 @@ package nz.mikhailov.motiv.database
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase.CONFLICT_NONE
+import androidx.core.database.getStringOrNull
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import java.time.Instant
@@ -33,5 +34,37 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
             }
         }
         execSQL("DROP TABLE transactions_1")
+    }
+}
+
+val MIGRATION_3_4 = object : Migration(3, 4) {
+
+    override fun migrate(database: SupportSQLiteDatabase) = with(database) {
+        // SQLite doesn't support add/remove NOT NULL constraint
+        // using temporary table strategy
+        execSQL("""
+            CREATE TABLE transactions_4 (
+                date INTEGER NOT NULL PRIMARY KEY,
+                amount INTEGER NOT NULL,
+                activity TEXT,
+                balance INTEGER NOT NULL)
+            """.trimIndent())
+        query("SELECT * FROM transactions ORDER BY date ASC").use { cursor ->
+            var runningBalance = 0
+            while (cursor.moveToNext()) {
+                val date = cursor.getLong(cursor.getColumnIndexOrThrow("date"))
+                val amount = cursor.getInt(cursor.getColumnIndexOrThrow("amount"))
+                val activity = cursor.getStringOrNull(cursor.getColumnIndexOrThrow("activity"))
+                runningBalance += amount
+                database.insert("transactions_4", CONFLICT_NONE, ContentValues().apply {
+                    put("date", date)
+                    put("amount", amount)
+                    put("activity", activity)
+                    put("balance", runningBalance)
+                })
+            }
+        }
+        execSQL("DROP TABLE transactions")
+        execSQL("ALTER TABLE transactions_4 RENAME TO transactions")
     }
 }

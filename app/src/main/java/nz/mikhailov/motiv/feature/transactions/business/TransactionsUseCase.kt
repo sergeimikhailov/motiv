@@ -24,6 +24,7 @@ class TransactionsUseCase(
                 date = Instant.now(),
                 amount = amount,
                 activity = activity,
+                balance = 0, // todo
             ))
     }
 
@@ -35,6 +36,7 @@ class TransactionsUseCase(
             .insert(TransactionRecord(
                 date = Instant.now(),
                 amount = -amount,
+                balance = 0, // todo
             ))
     }
 }
