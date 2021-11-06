@@ -8,6 +8,6 @@ data class TransactionsUIO(
 )
 
 fun List<Transaction>.toUIO() = TransactionsUIO(
-    balance = first().balance,
+    balance = firstOrNull()?.balance ?: 0,
     transactions = map(Transaction::toUIO),
 )
