@@ -27,10 +27,12 @@ fun TransactionsScreen(
     viewModel: TransactionsViewModel = viewModel(),
 ) {
     val transactions by viewModel.transactions.observeAsState(TransactionsUIO(balance = 0, transactions = emptyList()))
+    val rewards by viewModel.rewards.observeAsState(emptyList())
     val addTransaction = viewModel::deposit
     val withdraw = viewModel::withdraw
     TransactionsScreenLayout(
         modifier = modifier,
+        rewards = rewards,
         transactions = transactions,
         addTransaction = addTransaction,
         withdraw = withdraw,
@@ -41,6 +43,7 @@ fun TransactionsScreen(
 fun TransactionsScreenLayout(
     modifier: Modifier = Modifier,
     transactions: TransactionsUIO,
+    rewards: List<RewardUIO>,
     addTransaction: (RewardUIO) -> Unit,
     withdraw: (Int) -> Unit,
 ) {
@@ -59,27 +62,15 @@ fun TransactionsScreenLayout(
                 .padding(top = 32.dp)
                 .horizontalScroll(rememberScrollState())
         ) {
-            RewardButton(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .semantics { contentDescription = "Add coding reward" },
-                reward = RewardUIO.Code(1),
-                onClick = addTransaction,
-            )
-            RewardButton(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .semantics { contentDescription = "Add exercise reward" },
-                reward = RewardUIO.Exercise(1),
-                onClick = addTransaction,
-            )
-            RewardButton(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .semantics { contentDescription = "Add study reward" },
-                reward = RewardUIO.Study(2),
-                onClick = addTransaction,
-            )
+            rewards.forEach {
+                RewardButton(
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .semantics { contentDescription = it.actionDescription },
+                    reward = it,
+                    onClick = addTransaction,
+                )
+            }
         }
         Button(
             modifier = Modifier
@@ -130,6 +121,11 @@ fun TransactionsScreenPreview() {
     MotivTheme {
         Surface {
             TransactionsScreenLayout(
+                rewards = listOf(
+                    RewardUIO.Code(1),
+                    RewardUIO.Exercise(1),
+                    RewardUIO.Study(2),
+                ),
                 transactions = TransactionsUIO(
                     balance = 1,
                     transactions = listOf(

@@ -1,0 +1,103 @@
+package nz.mikhailov.motiv.feature.settings.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import nz.mikhailov.motiv.feature.settings.SettingsViewModel
+import nz.mikhailov.motiv.feature.settings.ui.model.RewardUIO
+import nz.mikhailov.motiv.ui.theme.MotivTheme
+import nz.mikhailov.motiv.ui.theme.Typography
+import nz.mikhailov.motiv.util.formatAsCurrency
+
+@Composable
+fun SettingsScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SettingsViewModel = viewModel(),
+) {
+    val rewards by viewModel.rewards.observeAsState(emptyList())
+    SettingsScreenLayout(
+        modifier = modifier,
+        rewards = rewards,
+    )
+}
+
+@Composable
+fun SettingsScreenLayout(
+    modifier: Modifier = Modifier,
+    rewards: List<RewardUIO> = emptyList(),
+) {
+    Column(
+        modifier = modifier.padding(16.dp),
+    ) {
+        Text(
+            text = "Settings",
+            style = Typography.displayLarge,
+        )
+        Text(
+            modifier = Modifier.padding(top = 32.dp),
+            text = "Current rewards:",
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        rewards.forEach {
+            Reward(
+                modifier = Modifier.padding(top = 16.dp),
+                reward = it,
+            )
+        }
+        Text(
+            modifier = Modifier.padding(top = 32.dp),
+            text = "* configuring rewards and their values will come in future versions",
+            style = MaterialTheme.typography.labelSmall,
+        )
+    }
+}
+
+@Composable
+private fun Reward(
+    modifier: Modifier = Modifier,
+    reward: RewardUIO,
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = reward.icon,
+                contentDescription = null, // decorative
+            )
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(reward.description)
+        }
+        Text(reward.amount.formatAsCurrency())
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun SettingsScreenPreview() {
+    MotivTheme {
+        Surface {
+            SettingsScreenLayout(
+                rewards = listOf(
+                    RewardUIO.Exercise(1),
+                    RewardUIO.Study(2),
+                    RewardUIO.Code(3),
+                )
+            )
+        }
+    }
+}

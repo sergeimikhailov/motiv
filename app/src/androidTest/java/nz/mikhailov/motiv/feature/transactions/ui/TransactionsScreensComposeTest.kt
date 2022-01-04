@@ -36,6 +36,7 @@ class TransactionsScreensComposeTest {
                 val (transactions, setTransactions) = remember { mutableStateOf(initialState) }
                 TransactionsScreenLayout(
                     transactions = transactions,
+                    rewards = listOf(RewardUIO.Study(amount = 2)),
                     addTransaction = {
                         setTransactions(TransactionsUIO(
                             balance = transactions.balance + it.amount,
@@ -66,6 +67,7 @@ class TransactionsScreensComposeTest {
                 )
                 val (transactions, setTransactions) = remember { mutableStateOf(initialState) }
                 TransactionsScreenLayout(
+                    rewards = emptyList(),
                     transactions = transactions,
                     addTransaction = { },
                     withdraw = {

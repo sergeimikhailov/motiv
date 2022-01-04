@@ -18,10 +18,20 @@ class TransactionsViewModel(
     private val feature: TransactionsFeature = Features.transactions,
 ) : ViewModel() {
 
+    val rewards: LiveData<List<RewardUIO>> get() = _rewards
+    private val _rewards = MutableLiveData<List<RewardUIO>>()
+
     val transactions: LiveData<TransactionsUIO> get() = _transactions
     private val _transactions = MutableLiveData<TransactionsUIO>()
 
     init {
+        viewModelScope.launch {
+            feature.getRewards()
+                .mapLatest { it.toUIO() }
+                .collect {
+                    _rewards.value = it
+                }
+        }
         viewModelScope.launch {
             feature.getLatestTransactions()
                 .mapLatest { it.toUIO() }
