@@ -15,6 +15,7 @@ class GetRewardsUseCase {
                     Reward.Code(1),
                     Reward.Exercise(1),
                     Reward.Study(2),
+                    Reward.NoJunkFood(1),
                 )
             )
         }

@@ -6,4 +6,5 @@ sealed class Reward {
     data class Code(override val amount: Int): Reward()
     data class Exercise(override val amount: Int): Reward()
     data class Study(override val amount: Int): Reward()
+    data class NoJunkFood(override val amount: Int): Reward()
 }

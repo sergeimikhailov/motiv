@@ -4,11 +4,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Help
+import androidx.compose.material.icons.filled.NoFood
 import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.vector.ImageVector
 import nz.mikhailov.motiv.feature.rewards.business.model.Reward
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
-import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.*
+import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Code
+import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Exercise
+import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.NoJunkFood
+import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Study
+import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Unknown
 
 sealed interface RewardUIO {
     val amount: Int
@@ -32,6 +37,11 @@ sealed interface RewardUIO {
         override val icon: ImageVector = Icons.Filled.DeveloperMode,
         override val actionDescription: String = "Add coding reward"): RewardUIO
 
+    data class NoJunkFood(
+        override val amount: Int,
+        override val icon: ImageVector = Icons.Filled.NoFood,
+        override val actionDescription: String = "Add no junk food reward"): RewardUIO
+
     data class Unknown(
         override val amount: Int,
         override val icon: ImageVector = Icons.Filled.Help,
@@ -42,6 +52,7 @@ fun Transaction.toRewardUIO() = when (activity) {
     Exercise(0).iconString -> Exercise(amount)
     Study(0).iconString -> Study(amount)
     Code(0).iconString -> Code(amount)
+    NoJunkFood(0).iconString -> NoJunkFood(amount)
     else -> Unknown(amount)
 }
 
@@ -51,4 +62,5 @@ fun Reward.toUIO() = when (this) {
     is Reward.Code -> Code(amount)
     is Reward.Exercise -> Exercise(amount)
     is Reward.Study -> Study(amount)
+    is Reward.NoJunkFood -> NoJunkFood(amount)
 }
