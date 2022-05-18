@@ -49,9 +49,12 @@ android {
         kotlinCompilerExtensionVersion compose_version
     }
     packagingOptions {
-        exclude "META-INF/AL2.0"
-        exclude "META-INF/LGPL2.1"
+        resources {
+            exclude "META-INF/AL2.0"
+            exclude "META-INF/LGPL2.1"
+        }
     }
+    namespace "nz.mikhailov.motiv"
 }
 
 dependencies {
