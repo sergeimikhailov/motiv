@@ -1,45 +1,27 @@
 package nz.mikhailov.motiv.feature.transactions
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import nz.mikhailov.motiv.Features
+import nz.mikhailov.motiv.feature.rewards.business.model.Reward
+import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.toUIO
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class TransactionsViewModel(
     private val feature: TransactionsFeature = Features.transactions,
 ) : ViewModel() {
 
-    val rewards: LiveData<List<RewardUIO>> get() = _rewards
-    private val _rewards = MutableLiveData<List<RewardUIO>>()
+    val rewards: LiveData<List<RewardUIO>> =
+        feature.getRewards().map(List<Reward>::toUIO).asLiveData()
 
-    val transactions: LiveData<TransactionsUIO> get() = _transactions
-    private val _transactions = MutableLiveData<TransactionsUIO>()
-
-    init {
-        viewModelScope.launch {
-            feature.getRewards()
-                .mapLatest { it.toUIO() }
-                .collect {
-                    _rewards.value = it
-                }
-        }
-        viewModelScope.launch {
-            feature.getLatestTransactions()
-                .mapLatest { it.toUIO() }
-                .collect {
-                    _transactions.value = it
-                }
-        }
-    }
+    val transactions: LiveData<TransactionsUIO> =
+        feature.getLatestTransactions().map(List<Transaction>::toUIO).asLiveData()
 
     fun deposit(reward: RewardUIO) {
         viewModelScope.launch {

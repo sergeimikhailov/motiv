@@ -5,7 +5,7 @@ import nz.mikhailov.motiv.feature.rewards.business.model.Reward
 import nz.mikhailov.motiv.feature.settings.business.GetRewardsUseCase
 
 interface SettingsFeature {
-    suspend fun getRewards(): Flow<List<Reward>>
+    fun getRewards(): Flow<List<Reward>>
 }
 
 class SettingsFacade private constructor(
@@ -16,5 +16,5 @@ class SettingsFacade private constructor(
         fun newInstance() = SettingsFacade()
     }
 
-    override suspend fun getRewards() = getRewardsUseCase()
+    override fun getRewards() = getRewardsUseCase()
 }

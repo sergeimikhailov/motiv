@@ -9,8 +9,8 @@ import nz.mikhailov.motiv.feature.transactions.business.WithdrawUseCase
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 
 interface TransactionsFeature {
-    suspend fun getRewards(): Flow<List<Reward>>
-    suspend fun getLatestTransactions(): Flow<List<Transaction>>
+    fun getRewards(): Flow<List<Reward>>
+    fun getLatestTransactions(): Flow<List<Transaction>>
     suspend fun deposit(amount: Int, activity: String)
     suspend fun withdraw(amount: Int)
 }
@@ -26,9 +26,9 @@ class TransactionsFacade private constructor(
         fun newInstance() = TransactionsFacade()
     }
 
-    override suspend fun getRewards() = getRewardsUseCase()
+    override fun getRewards() = getRewardsUseCase()
 
-    override suspend fun getLatestTransactions() = getLatestTransactionsUseCase()
+    override fun getLatestTransactions() = getLatestTransactionsUseCase()
 
     override suspend fun deposit(amount: Int, activity: String) = depositUseCase(amount, activity)
 
