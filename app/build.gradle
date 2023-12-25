@@ -11,8 +11,8 @@ android {
         applicationId "nz.mikhailov.motiv"
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode findProperty("android.injected.version.code") as Integer ?: 1
+        versionName findProperty("android.injected.version.name") ?: "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
