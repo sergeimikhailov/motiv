@@ -17,10 +17,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Java 11
+      - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Build
         run: >-
