@@ -18,13 +18,13 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-//        ksp {
-//            arg("room.schemaLocation", "$projectDir/schemas")
-//        }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
-//    sourceSets {
-//        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
-//    }
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
     buildTypes {
         release {
             minifyEnabled true
@@ -37,7 +37,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
-        useIR = true
     }
     buildFeatures {
         compose true
