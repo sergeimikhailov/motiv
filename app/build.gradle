@@ -42,7 +42,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidxCompose.get().toString()
+        kotlinCompilerExtensionVersion libs.versions.androidxComposeCompiler.get().toString()
     }
     packagingOptions {
         resources {
@@ -55,6 +55,7 @@ android {
 
 dependencies {
 
+    implementation platform(libs.androidx.compose.bom)
     implementation libs.androidx.activity.compose
     implementation libs.androidx.appcompat
     implementation libs.androidx.compose.material // some components are missing in material3
@@ -79,6 +80,8 @@ dependencies {
 
     testImplementation libs.assertj.core
     testImplementation libs.junit4
+
+    androidTestImplementation platform(libs.androidx.compose.bom)
     androidTestImplementation libs.androidx.compose.ui.test
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.ext
