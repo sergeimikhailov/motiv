@@ -56,25 +56,18 @@ android {
 dependencies {
 
     implementation platform(libs.androidx.compose.bom)
-    implementation libs.androidx.activity.compose
-    implementation libs.androidx.appcompat
     implementation libs.androidx.compose.material // some components are missing in material3
     implementation libs.androidx.compose.material.iconsExtended
     implementation libs.androidx.compose.material3
     implementation libs.androidx.compose.runtime.livedata
     implementation libs.androidx.compose.ui.tooling
-    implementation libs.androidx.core.ktx
     implementation libs.androidx.navigation.compose
 
     // room
     implementation libs.room.ktx
     ksp libs.room.compiler
 
-    implementation libs.androidx.lifecycle.common.java8
     implementation libs.androidx.lifecycle.livedata.ktx
-    implementation libs.androidx.lifecycle.runtime.ktx
-    implementation libs.androidx.lifecycle.viewModelCompose
-    implementation libs.androidx.lifecycle.viewmodel.ktx
 
     debugImplementation libs.androidx.compose.ui.testManifest
 
