@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -18,15 +18,13 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
+//        ksp {
+//            arg("room.schemaLocation", "$projectDir/schemas")
+//        }
     }
-    sourceSets {
-        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
-    }
+//    sourceSets {
+//        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+//    }
     buildTypes {
         release {
             minifyEnabled true
@@ -70,7 +68,7 @@ dependencies {
 
     // room
     implementation libs.room.ktx
-    kapt libs.room.compiler
+    ksp libs.room.compiler
 
     implementation libs.androidx.lifecycle.common.java8
     implementation libs.androidx.lifecycle.livedata.ktx
