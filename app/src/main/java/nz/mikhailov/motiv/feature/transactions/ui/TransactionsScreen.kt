@@ -1,9 +1,17 @@
 package nz.mikhailov.motiv.feature.transactions.ui
 
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -14,7 +22,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
@@ -24,7 +32,7 @@ import nz.mikhailov.motiv.ui.theme.MotivTheme
 @Composable
 fun TransactionsScreen(
     modifier: Modifier = Modifier,
-    viewModel: TransactionsViewModel = viewModel(),
+    viewModel: TransactionsViewModel = hiltViewModel(),
 ) {
     val transactions by viewModel.transactions.observeAsState(TransactionsUIO(balance = 0, transactions = emptyList()))
     val rewards by viewModel.rewards.observeAsState(emptyList())

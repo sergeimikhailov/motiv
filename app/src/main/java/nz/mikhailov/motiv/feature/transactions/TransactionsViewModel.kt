@@ -4,17 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import nz.mikhailov.motiv.Features
 import nz.mikhailov.motiv.feature.rewards.business.model.Reward
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.toUIO
+import javax.inject.Inject
 
-class TransactionsViewModel(
-    private val feature: TransactionsFeature = Features.transactions,
+@HiltViewModel
+class TransactionsViewModel @Inject constructor(
+    private val feature: TransactionsFeature,
 ) : ViewModel() {
 
     val rewards: LiveData<List<RewardUIO>> =

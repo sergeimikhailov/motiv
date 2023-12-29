@@ -1,14 +1,11 @@
 package nz.mikhailov.motiv.feature.transactions.data
 
-import androidx.annotation.WorkerThread
-import nz.mikhailov.motiv.Singletons
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
+import javax.inject.Inject
 
-@WorkerThread
-class TransactionRepository(
-    private val dataStore: LocalTransactionDataStore = Singletons.roomDatabase.transactionRecordDao(),
+class TransactionRepository @Inject constructor(
+    private val dataStore: LocalTransactionDataStore,
 ) {
-
     fun latestTransactions(limit: Int = 100) = dataStore.read(limit)
 
     suspend fun latestTransaction() = dataStore.readLatest()

@@ -1,12 +1,7 @@
 package nz.mikhailov.motiv
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-@Suppress("unused")
-class MotivApplication: Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        Singletons.init(this)
-    }
-}
+@HiltAndroidApp
+class MotivApplication: Application()

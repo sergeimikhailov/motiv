@@ -2,8 +2,14 @@ package nz.mikhailov.motiv.feature.transactions.ui
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertAny
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onChildren
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextReplacement
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
@@ -20,12 +26,17 @@ class TransactionsScreensComposeTest {
     fun shouldDisplayBalanceOnStart(): Unit = with(composeTestRule) {
         setContent {
             MotivTheme {
-                TransactionsScreen()
+                TransactionsScreenLayout(
+                    transactions = TransactionsUIO(balance = 12, transactions = emptyList()),
+                    rewards = emptyList(),
+                    addTransaction = {},
+                    withdraw = {},
+                )
             }
         }
         onNodeWithContentDescription("Current balance")
             .assertIsDisplayed()
-            .onChildren().assertAny(hasText("$", substring = true))
+            .onChildren().assertAny(hasText("$12", substring = true))
     }
 
     @Test

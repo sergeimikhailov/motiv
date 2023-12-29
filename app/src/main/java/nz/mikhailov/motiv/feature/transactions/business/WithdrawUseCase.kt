@@ -5,9 +5,10 @@ import kotlinx.coroutines.withContext
 import nz.mikhailov.motiv.feature.transactions.data.TransactionRepository
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 import java.time.Instant
+import javax.inject.Inject
 
-class WithdrawUseCase(
-    private val repository: TransactionRepository = TransactionRepository(),
+class WithdrawUseCase @Inject constructor(
+    private val repository: TransactionRepository,
 ) {
 
     suspend operator fun invoke(amount: Int) = withContext(Dispatchers.IO) {

@@ -3,18 +3,10 @@ package nz.mikhailov.motiv.feature.settings
 import kotlinx.coroutines.flow.Flow
 import nz.mikhailov.motiv.feature.rewards.business.model.Reward
 import nz.mikhailov.motiv.feature.settings.business.GetRewardsUseCase
+import javax.inject.Inject
 
-interface SettingsFeature {
-    fun getRewards(): Flow<List<Reward>>
-}
-
-class SettingsFacade private constructor(
-    private val getRewardsUseCase: GetRewardsUseCase = GetRewardsUseCase(),
-): SettingsFeature {
-
-    companion object {
-        fun newInstance() = SettingsFacade()
-    }
-
-    override fun getRewards() = getRewardsUseCase()
+class SettingsFeature @Inject constructor(
+    private val getRewardsUseCase: GetRewardsUseCase,
+){
+    fun getRewards(): Flow<List<Reward>> = getRewardsUseCase()
 }
