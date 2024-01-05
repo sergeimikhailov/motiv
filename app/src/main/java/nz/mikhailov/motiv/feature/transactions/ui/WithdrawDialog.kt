@@ -2,12 +2,10 @@ package nz.mikhailov.motiv.feature.transactions.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun WithdrawDialog(
@@ -47,7 +46,7 @@ fun WithdrawDialog(
             }
         },
         text = {
-            TextField( // TODO: migrate to M3 when available
+            TextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .semantics { contentDescription = "Amount to withdraw" },
@@ -57,10 +56,16 @@ fun WithdrawDialog(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Number,
                 ),
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = LocalContentColor.current,
-                ),
             )
         },
+    )
+}
+
+@Preview
+@Composable
+fun WithdrawDialogPreview() {
+    WithdrawDialog(
+        onConfirm = {},
+        onCancel = {},
     )
 }

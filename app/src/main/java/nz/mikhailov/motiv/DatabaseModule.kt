@@ -28,5 +28,6 @@ object DatabaseModule {
         .build()
 
     @Provides
+    @Singleton
     fun providesTransactionDataStore(database: MotivRoomDatabase) = database.transactionRecordDao()
 }
