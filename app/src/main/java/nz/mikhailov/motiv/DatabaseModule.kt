@@ -29,5 +29,9 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providesTransactionDataStore(database: MotivRoomDatabase) = database.transactionRecordDao()
+    fun provideTransactionDataStore(database: MotivRoomDatabase) = database.transactionRecordDao()
+
+    @Provides
+    @Singleton
+    fun provideWeightRecordDataStore(database: MotivRoomDatabase) = database.weightRecordDao()
 }
