@@ -42,7 +42,7 @@ private fun App() {
         Surface {
             Scaffold(
                 topBar = {
-                    SmallTopAppBar(
+                    TopAppBar(
                         title = { Text("Motiv") },
                         actions = {
                             val isSettingsScreen = "settings" == navBackStackEntry?.destination?.route
