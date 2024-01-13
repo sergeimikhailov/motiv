@@ -6,8 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,6 +26,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import nz.mikhailov.motiv.feature.settings.ui.SettingsScreen
+import nz.mikhailov.motiv.feature.tracker.TrackerScreen
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
 import nz.mikhailov.motiv.ui.NavigationButton
 import nz.mikhailov.motiv.ui.theme.MotivTheme
@@ -57,7 +67,23 @@ private fun App() {
                             }
                         },
                     )
-                }
+                },
+                bottomBar = {
+                    NavigationBar {
+                        NavigationBarItem(
+                            selected = "transactions" == navBackStackEntry?.destination?.route,
+                            onClick = { navController.navigate("transactions") },
+                            icon = { Icon(Icons.Filled.EmojiEvents, contentDescription = "Rewards") },
+                            label = { Text(text = "Rewards") },
+                        )
+                        NavigationBarItem(
+                            selected = "tracker" == navBackStackEntry?.destination?.route,
+                            onClick = { navController.navigate("tracker") },
+                            icon = { Icon(Icons.Filled.FiberManualRecord, contentDescription = "Tracker") },
+                            label = { Text(text = "Tracker") },
+                        )
+                    }
+                },
             ) { innerPadding ->
                 NavHost(navController = navController, startDestination = "transactions") {
                     composable("transactions") {
@@ -67,6 +93,11 @@ private fun App() {
                     }
                     composable("settings") {
                         SettingsScreen(
+                            modifier = Modifier.padding(innerPadding),
+                        )
+                    }
+                    composable("tracker") {
+                        TrackerScreen(
                             modifier = Modifier.padding(innerPadding),
                         )
                     }
