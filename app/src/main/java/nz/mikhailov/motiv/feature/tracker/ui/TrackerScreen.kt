@@ -32,7 +32,7 @@ fun TrackerScreen(
     TrackerScreenLayout(
         modifier = modifier,
         data = data,
-        saveNewRecord = {},
+        saveNewRecord = viewModel::recordWeight,
     )
 }
 
@@ -68,8 +68,13 @@ fun TrackerScreenLayout(
     }
     if (showDialog) {
         WeightRecordDialog(
-            onSubmit = saveNewRecord,
-            onCancel = { showDialog = false }
+            onSubmit = {
+                saveNewRecord(it)
+                showDialog = false
+            },
+            onCancel = {
+                showDialog = false
+            }
         )
     }
 }
