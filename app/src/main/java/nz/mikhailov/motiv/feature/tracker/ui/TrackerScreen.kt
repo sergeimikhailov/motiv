@@ -3,6 +3,11 @@ package nz.mikhailov.motiv.feature.tracker.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,18 +37,28 @@ fun TrackerScreenLayout(
     modifier: Modifier = Modifier,
     data: TrackerUIO,
 ) {
-    Column(
+    Scaffold(
         modifier = modifier.padding(16.dp),
-    ) {
-        Text(
-            text = "Tracker",
-            style = Typography.displayLarge,
-        )
-        WeightLog(
+        floatingActionButton = {
+            FloatingActionButton(onClick = {}) {
+                Icon(Icons.Filled.Edit, contentDescription = "Make a new record")
+            }
+        }
+    ) { paddingValues ->
+        Column(
             modifier = Modifier
-                .fillMaxSize(),
-            data = data.weightLog,
-        )
+                .padding(paddingValues),
+        ) {
+            Text(
+                text = "Tracker",
+                style = Typography.displayLarge,
+            )
+            WeightLog(
+                modifier = Modifier
+                    .fillMaxSize(),
+                data = data.weightLog,
+            )
+        }
     }
 }
 
