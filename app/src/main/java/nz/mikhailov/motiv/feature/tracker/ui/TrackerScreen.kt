@@ -13,6 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,6 +32,7 @@ fun TrackerScreen(
     TrackerScreenLayout(
         modifier = modifier,
         data = data,
+        saveNewRecord = {},
     )
 }
 
@@ -36,11 +40,13 @@ fun TrackerScreen(
 fun TrackerScreenLayout(
     modifier: Modifier = Modifier,
     data: TrackerUIO,
+    saveNewRecord: (Double) -> Unit,
 ) {
+    var showDialog by remember { mutableStateOf(false) }
     Scaffold(
         modifier = modifier.padding(16.dp),
         floatingActionButton = {
-            FloatingActionButton(onClick = {}) {
+            FloatingActionButton(onClick = { showDialog = true }) {
                 Icon(Icons.Filled.Edit, contentDescription = "Make a new record")
             }
         }
@@ -60,6 +66,12 @@ fun TrackerScreenLayout(
             )
         }
     }
+    if (showDialog) {
+        WeightRecordDialog(
+            onSubmit = saveNewRecord,
+            onCancel = { showDialog = false }
+        )
+    }
 }
 
 @Preview
@@ -73,7 +85,8 @@ fun TrackerScreenPreview() {
                         WeightUIO(date = "13 January 2024", weight = "92.5 kg"),
                         WeightUIO(date = "24 December 2024", weight = "105.0 kg"),
                     )
-                )
+                ),
+                saveNewRecord = {},
             )
         }
     }
