@@ -8,6 +8,8 @@ on:
 jobs:
   test:
     uses: sergeimikhailov/motiv/.github/workflows/main.yml@main
+    secrets:
+      GCP_CONFIGURATION_ANDROID_DEBUG: ${{ secrets.GCP_CONFIGURATION_ANDROID_DEBUG }}
 
   deploy:
     needs: test
