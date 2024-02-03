@@ -20,6 +20,12 @@ jobs:
         with:
           java-version: 17
 
+      - name: Firebase Config
+        env:
+          GCP_CONFIGURATION_ANDROID: ${{ secrets.GCP_CONFIGURATION_ANDROID_DEBUG }}
+        working-directory: app
+        run: echo $GCP_CONFIGURATION_ANDROID | base64 --decode > google-services.json
+
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
