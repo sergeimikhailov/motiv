@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
   workflow_call:
+    secrets:
+      GCP_CONFIGURATION_ANDROID_DEBUG:
+        required: true
 
 jobs:
   test:
