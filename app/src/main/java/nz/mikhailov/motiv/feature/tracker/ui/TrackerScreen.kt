@@ -1,5 +1,6 @@
 package nz.mikhailov.motiv.feature.tracker.ui
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import nz.mikhailov.motiv.feature.photo.business.TakePictureContract
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 import nz.mikhailov.motiv.ui.theme.Typography
 
@@ -32,6 +34,9 @@ fun TrackerScreen(
     TrackerScreenLayout(
         modifier = modifier,
         data = data,
+        onValueChange = viewModel::updateDialogState,
+        takePictureContract = viewModel::takePictureContract,
+        processPicture = viewModel::processPicture,
         saveNewRecord = viewModel::recordWeight,
     )
 }
@@ -40,6 +45,9 @@ fun TrackerScreen(
 fun TrackerScreenLayout(
     modifier: Modifier = Modifier,
     data: TrackerUIO,
+    onValueChange: (String) -> Unit,
+    takePictureContract: () -> TakePictureContract,
+    processPicture: (Bitmap?) -> Unit,
     saveNewRecord: (Double) -> Unit,
 ) {
     var showDialog by remember { mutableStateOf(false) }
@@ -68,13 +76,17 @@ fun TrackerScreenLayout(
     }
     if (showDialog) {
         WeightRecordDialog(
+            state = data.dialogState,
+            onValueChange = onValueChange,
             onSubmit = {
                 saveNewRecord(it)
                 showDialog = false
             },
             onCancel = {
                 showDialog = false
-            }
+            },
+            takePictureContract = takePictureContract,
+            onAutofill = processPicture,
         )
     }
 }
@@ -91,6 +103,9 @@ fun TrackerScreenPreview() {
                         WeightUIO(date = "24 December 2024", weight = "105.0 kg"),
                     )
                 ),
+                onValueChange = {},
+                takePictureContract = { error("should not be called") },
+                processPicture = {},
                 saveNewRecord = {},
             )
         }
