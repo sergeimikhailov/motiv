@@ -28,6 +28,7 @@ fun WeightRecordDialog(
     state: DialogState,
     onValueChange: (String) -> Unit,
     onSubmit: (Double) -> Unit,
+    autofillEnabled: Boolean,
     takePictureContract: () -> TakePictureContract,
     onAutofill: (Bitmap?) -> Unit,
     onCancel: () -> Unit,
@@ -68,14 +69,14 @@ fun WeightRecordDialog(
                     keyboardType = KeyboardType.Decimal,
                 ),
                 enabled = state !is Loading,
-                trailingIcon = {
+                trailingIcon = if (autofillEnabled) {{
                     IconButton(onClick = { launcher.launch(null)} ) {
                         Icon(
                             Icons.Filled.AutoAwesome,
                             contentDescription = "Fill automatically"
                         )
                     }
-                },
+                }} else null,
             )
         },
     )
@@ -89,6 +90,7 @@ private fun WeightRecordDialogPreview() {
             state = Result("76.4"),
             onValueChange = {},
             onSubmit = {},
+            autofillEnabled = true,
             onAutofill = {},
             takePictureContract = {
                 object : TakePictureContract() {

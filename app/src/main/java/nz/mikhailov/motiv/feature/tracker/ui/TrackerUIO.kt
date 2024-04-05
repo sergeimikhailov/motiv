@@ -5,6 +5,7 @@ import nz.mikhailov.motiv.feature.tracker.business.Weight
 data class TrackerUIO(
     val dialogState: DialogState = DialogState.Result(""),
     val weightLog: List<WeightUIO> = emptyList(),
+    val autofillEnabled: Boolean = false,
 )
 
 sealed interface DialogState {

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.remoteconfig.remoteConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,7 @@ import nz.mikhailov.motiv.feature.tracker.business.WeightVisionRepository
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Error
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Loading
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Result
+import nz.mikhailov.motiv.util.FirebaseRemoteConfig
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,9 +24,10 @@ class TrackerViewModel @Inject constructor(
     private val weightRepository: WeightRepository,
     private val photoRepository: PhotoRepository,
     private val weightVisionRepository: WeightVisionRepository,
+    private val config: FirebaseRemoteConfig,
 ): ViewModel() {
 
-    val dialogState = MutableStateFlow<DialogState>(Result(""))
+    private val dialogState = MutableStateFlow<DialogState>(Result(""))
 
     val uiState = combine(
         dialogState,
@@ -33,6 +36,7 @@ class TrackerViewModel @Inject constructor(
         TrackerUIO(
             dialogState = weight,
             weightLog = latestWeights.toUIO(),
+            autofillEnabled = config.autofillEnabled,
         )
     }.asLiveData()
 

@@ -85,6 +85,7 @@ fun TrackerScreenLayout(
             onCancel = {
                 showDialog = false
             },
+            autofillEnabled = data.autofillEnabled,
             takePictureContract = takePictureContract,
             onAutofill = processPicture,
         )
