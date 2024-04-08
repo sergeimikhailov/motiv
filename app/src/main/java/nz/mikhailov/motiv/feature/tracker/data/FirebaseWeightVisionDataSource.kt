@@ -1,8 +1,8 @@
 package nz.mikhailov.motiv.feature.tracker.data
 
+import com.google.firebase.Firebase
 import com.google.firebase.functions.HttpsCallableReference
-import com.google.firebase.functions.ktx.functions
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.functions.functions
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import kotlin.Result.Companion.failure

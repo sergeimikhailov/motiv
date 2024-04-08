@@ -74,6 +74,9 @@ dependencies {
     implementation libs.firebase.function
     implementation libs.firebase.remote.config
 
+    debugImplementation libs.firebase.appcheck.debug
+    releaseImplementation libs.firebase.appcheck.integrity
+
     // room
     implementation libs.room.ktx
     ksp libs.room.compiler
