@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.remoteconfig.remoteConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -62,7 +61,9 @@ class TrackerViewModel @Inject constructor(
         }
     }
 
-    fun updateDialogState(value: String) = dialogState.value.apply {
-        Result(value)
+    fun updateDialogState(value: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dialogState.emit(Result(value))
+        }
     }
 }
