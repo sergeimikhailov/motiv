@@ -4,22 +4,30 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import nz.mikhailov.motiv.feature.photo.business.TakePictureContract
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Loading
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Result
+import nz.mikhailov.motiv.ui.dialog.FullScreenDialog
 import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @Composable
@@ -41,27 +49,26 @@ fun WeightRecordDialog(
         is Result -> state.weight
         else -> ""
     }
-    AlertDialog(
+    val focusRequester = remember { FocusRequester() }
+    val snackbarHostState = remember { SnackbarHostState() }
+    FullScreenDialog(
         modifier = modifier,
-        onDismissRequest = onCancel,
-        title = {
-            Text("New weight value")
-        },
-        confirmButton = {
-            Button(
+        onDismiss = onCancel,
+        title = "New weight value",
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        actions = {
+            TextButton(
                 onClick = { onSubmit(value.toDoubleOrNull() ?: 0.0) },
                 enabled = state !is Loading,
             ) {
                 Text(text = "Save")
             }
         },
-        dismissButton = {
-            Button(onClick = onCancel) {
-                Text(text = "Cancel")
-            }
-        },
-        text = {
+        content = {
             TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(focusRequester),
                 value = value,
                 onValueChange = onValueChange,
                 keyboardOptions = KeyboardOptions(
@@ -80,6 +87,14 @@ fun WeightRecordDialog(
             )
         },
     )
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
+    if (state is DialogState.Error) {
+        LaunchedEffect(snackbarHostState) {
+            snackbarHostState.showSnackbar(state.reason, duration = SnackbarDuration.Long)
+        }
+    }
 }
 
 @Preview
