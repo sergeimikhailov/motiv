@@ -39,9 +39,9 @@ class TrackerViewModel @Inject constructor(
         )
     }.asLiveData()
 
-    fun recordWeight(value: Double) {
+    fun recordWeight() = with(dialogState.value as Result) {
         viewModelScope.launch(Dispatchers.IO) {
-            weightRepository.recordWeight(value)
+            weightRepository.recordWeight(weight.toDoubleOrNull())
             dialogState.value = Result("")
         }
     }

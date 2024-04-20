@@ -35,7 +35,7 @@ fun WeightRecordDialog(
     modifier: Modifier = Modifier,
     state: DialogState,
     onValueChange: (String) -> Unit,
-    onSubmit: (Double) -> Unit,
+    onSubmit: () -> Unit,
     autofillEnabled: Boolean,
     takePictureContract: () -> TakePictureContract,
     onAutofill: (Bitmap?) -> Unit,
@@ -51,6 +51,7 @@ fun WeightRecordDialog(
     }
     val focusRequester = remember { FocusRequester() }
     val snackbarHostState = remember { SnackbarHostState() }
+    val currentLaunchAutofill = remember { { launcher.launch(null) } }
     FullScreenDialog(
         modifier = modifier,
         onDismiss = onCancel,
@@ -58,7 +59,7 @@ fun WeightRecordDialog(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         actions = {
             TextButton(
-                onClick = { onSubmit(value.toDoubleOrNull() ?: 0.0) },
+                onClick = onSubmit,
                 enabled = state !is Loading,
             ) {
                 Text(text = "Save")
@@ -70,6 +71,8 @@ fun WeightRecordDialog(
                     .fillMaxWidth()
                     .focusRequester(focusRequester),
                 value = value,
+                maxLines = 1,
+                minLines = 1,
                 onValueChange = onValueChange,
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
@@ -77,7 +80,7 @@ fun WeightRecordDialog(
                 ),
                 enabled = state !is Loading,
                 trailingIcon = if (autofillEnabled) {{
-                    IconButton(onClick = { launcher.launch(null)} ) {
+                    IconButton(onClick = currentLaunchAutofill) {
                         Icon(
                             Icons.Filled.AutoAwesome,
                             contentDescription = "Fill automatically"

@@ -37,7 +37,7 @@ fun TrackerScreen(
         onValueChange = viewModel::updateDialogState,
         takePictureContract = viewModel::takePictureContract,
         processPicture = viewModel::processPicture,
-        saveNewRecord = viewModel::recordWeight,
+        onSave = viewModel::recordWeight,
     )
 }
 
@@ -48,7 +48,7 @@ fun TrackerScreenLayout(
     onValueChange: (String) -> Unit,
     takePictureContract: () -> TakePictureContract,
     processPicture: (Bitmap?) -> Unit,
-    saveNewRecord: (Double) -> Unit,
+    onSave: () -> Unit,
 ) {
     var showDialog by remember { mutableStateOf(false) }
     Scaffold(
@@ -84,7 +84,7 @@ fun TrackerScreenLayout(
             state = data.dialogState,
             onValueChange = onValueChange,
             onSubmit = {
-                saveNewRecord(it)
+                onSave()
                 showDialog = false
             },
             onCancel = {
@@ -112,7 +112,7 @@ fun TrackerScreenPreview() {
                 onValueChange = {},
                 takePictureContract = { error("should not be called") },
                 processPicture = {},
-                saveNewRecord = {},
+                onSave = {},
             )
         }
     }
