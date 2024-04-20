@@ -54,7 +54,12 @@ fun TrackerScreenLayout(
     Scaffold(
         modifier = modifier.padding(16.dp),
         floatingActionButton = {
-            FloatingActionButton(onClick = { showDialog = true }) {
+            FloatingActionButton(
+                onClick = {
+                    onValueChange("")
+                    showDialog = true
+                },
+            ) {
                 Icon(Icons.Filled.Edit, contentDescription = "Make a new record")
             }
         }

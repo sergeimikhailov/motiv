@@ -61,9 +61,5 @@ class TrackerViewModel @Inject constructor(
         }
     }
 
-    fun updateDialogState(value: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dialogState.emit(Result(value))
-        }
-    }
+    fun updateDialogState(value: String) = dialogState.tryEmit(Result(value))
 }
