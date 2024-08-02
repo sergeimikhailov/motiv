@@ -13,7 +13,7 @@ on:
 
 jobs:
   test:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -29,9 +29,8 @@ jobs:
         working-directory: app
         run: echo $GCP_CONFIGURATION_ANDROID_DEBUG | base64 --decode > google-services.json
 
-      - name: Run tests
+      - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          arch: arm64-v8a
           script: ./gradlew lint testDebug connectedDebugAndroidTest
