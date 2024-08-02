@@ -4,6 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -18,10 +24,18 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy.Companion.Offscreen
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import nz.mikhailov.motiv.feature.photo.business.TakePictureContract
@@ -81,8 +95,43 @@ fun WeightRecordDialog(
                 enabled = state !is Loading,
                 trailingIcon = if (autofillEnabled) {{
                     IconButton(onClick = currentLaunchAutofill) {
+                        val infiniteTransition = rememberInfiniteTransition(label = "animatedIcon")
+                        val offset by infiniteTransition.animateFloat(
+                            initialValue = 0f,
+                            targetValue = 1f,
+                            animationSpec = infiniteRepeatable(
+                                animation = tween(durationMillis = 2000, easing = LinearEasing),
+                                repeatMode = RepeatMode.Reverse
+                            ), label = "offsetAnimation"
+                        )
                         Icon(
-                            Icons.Filled.AutoAwesome,
+                            modifier = Modifier.then(
+                                if (state is Loading) {
+                                    Modifier
+                                        .graphicsLayer { compositingStrategy = Offscreen }
+                                        .drawWithContent {
+                                            drawContent()
+                                            drawRect(
+                                                brush = Brush.linearGradient(
+                                                    listOf(
+                                                        Color.Blue,
+                                                        Color.Red,
+                                                        Color.Blue,
+                                                    ),
+                                                    start = Offset(
+                                                        size.width * offset,
+                                                        size.height * offset,
+                                                    ),
+                                                ),
+                                                blendMode = BlendMode.SrcIn,
+                                            )
+                                        }
+                                } else {
+                                    Modifier
+                                }
+                            )
+                                ,
+                            imageVector = Icons.Filled.AutoAwesome,
                             contentDescription = "Fill automatically"
                         )
                     }
