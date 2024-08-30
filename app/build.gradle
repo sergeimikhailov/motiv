@@ -61,6 +61,7 @@ android {
 
 dependencies {
 
+    implementation project(':core:database')
     implementation platform(libs.androidx.compose.bom)
     implementation platform(libs.firebase.bom)
     implementation libs.androidx.compose.material // some components are missing in material3
