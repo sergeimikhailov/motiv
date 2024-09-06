@@ -15,7 +15,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
         .ofPattern("yyyy-MM-dd HH:mm")
         .withZone(ZoneId.systemDefault())
 
-    override fun migrate(database: SupportSQLiteDatabase) = with(database) {
+    override fun migrate(db: SupportSQLiteDatabase) = with(db) {
         // SQLite bundled in API 26 doesn't support rename column
         execSQL("ALTER TABLE transactions RENAME TO transactions_1")
         execSQL("""
@@ -27,7 +27,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
             while (cursor.moveToNext()) {
                 val date = dateTimeFormatter.parse(cursor.getString(0), Instant::from)
                 val amount = cursor.getInt(1)
-                database.insert("transactions", CONFLICT_NONE, ContentValues().apply {
+                db.insert("transactions", CONFLICT_NONE, ContentValues().apply {
                     put("date", date.toEpochMilli())
                     put("amount", amount)
                 })
@@ -39,7 +39,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
 
 val MIGRATION_3_4 = object : Migration(3, 4) {
 
-    override fun migrate(database: SupportSQLiteDatabase) = with(database) {
+    override fun migrate(db: SupportSQLiteDatabase) = with(db) {
         // SQLite doesn't support add/remove NOT NULL constraint
         // using temporary table strategy
         execSQL("""
@@ -56,7 +56,7 @@ val MIGRATION_3_4 = object : Migration(3, 4) {
                 val amount = cursor.getInt(cursor.getColumnIndexOrThrow("amount"))
                 val activity = cursor.getStringOrNull(cursor.getColumnIndexOrThrow("activity"))
                 runningBalance += amount
-                database.insert("transactions_4", CONFLICT_NONE, ContentValues().apply {
+                db.insert("transactions_4", CONFLICT_NONE, ContentValues().apply {
                     put("date", date)
                     put("amount", amount)
                     put("activity", activity)

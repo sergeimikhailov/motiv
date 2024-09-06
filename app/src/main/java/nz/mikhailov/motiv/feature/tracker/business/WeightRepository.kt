@@ -1,8 +1,8 @@
 package nz.mikhailov.motiv.feature.tracker.business
 
 import kotlinx.coroutines.flow.map
-import nz.mikhailov.motiv.feature.tracker.data.LocalWeightRecordDataStore
-import nz.mikhailov.motiv.feature.tracker.data.WeightRecord
+import nz.mikhailov.motiv.data.weight.LocalWeightRecordDataStore
+import nz.mikhailov.motiv.data.weight.WeightRecord
 import java.time.Instant
 import javax.inject.Inject
 

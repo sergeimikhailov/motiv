@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import nz.mikhailov.motiv.data.weight.WeightDatabase
 import nz.mikhailov.motiv.database.MIGRATION_1_2
 import nz.mikhailov.motiv.database.MIGRATION_3_4
 import nz.mikhailov.motiv.database.MotivRoomDatabase
@@ -29,9 +30,22 @@ object DatabaseModule {
 
     @Provides
     @Singleton
+    fun provideWeightRoomDatabase(@ApplicationContext context: Context) = Room
+        .databaseBuilder(
+            context.applicationContext,
+            WeightDatabase::class.java,
+            "weight_database")
+        .build()
+
+    @Provides
+    @Singleton
     fun provideTransactionDataStore(database: MotivRoomDatabase) = database.transactionRecordDao()
 
     @Provides
     @Singleton
-    fun provideWeightRecordDataStore(database: MotivRoomDatabase) = database.weightRecordDao()
+    fun provideLegacyWeightRecordDataStore(database: MotivRoomDatabase) = database.weightRecordDao()
+
+    @Provides
+    @Singleton
+    fun provideWeightRecordDataStore(database: WeightDatabase) = database.weightRecordDao()
 }
