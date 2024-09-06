@@ -4,7 +4,7 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import nz.mikhailov.motiv.feature.tracker.data.LocalWeightRecordDataStore
+import nz.mikhailov.motiv.feature.tracker.data.LegacyWeightRecordDataStore
 import nz.mikhailov.motiv.feature.tracker.data.WeightRecord
 import nz.mikhailov.motiv.feature.transactions.data.LocalTransactionDataStore
 import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
@@ -24,5 +24,5 @@ import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 @TypeConverters(RoomDatabaseConverters::class)
 abstract class MotivRoomDatabase : RoomDatabase() {
     abstract fun transactionRecordDao(): LocalTransactionDataStore
-    abstract fun weightRecordDao(): LocalWeightRecordDataStore
+    abstract fun legacyWeightRecordDao(): LegacyWeightRecordDataStore
 }
