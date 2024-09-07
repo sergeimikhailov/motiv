@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LegacyWeightRecordDataStore {
 
-    @Query("SELECT * FROM weight ORDER BY date DESC LIMIT :limit")
-    fun read(limit: Int): Flow<List<WeightRecord>>
+    @Query("SELECT * FROM weight ORDER BY date DESC")
+    fun read(): Flow<List<WeightRecord>>
 }

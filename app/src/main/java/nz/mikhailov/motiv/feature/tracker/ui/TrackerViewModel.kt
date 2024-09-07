@@ -26,6 +26,12 @@ class TrackerViewModel @Inject constructor(
     private val config: FirebaseRemoteConfig,
 ): ViewModel() {
 
+    init {
+        viewModelScope.launch {
+            weightRepository.migrateData()
+        }
+    }
+
     private val dialogState = MutableStateFlow<DialogState>(Result(""))
 
     val uiState = combine(
