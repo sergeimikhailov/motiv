@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -9,28 +10,17 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
-
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
+        minSdk = 26
     }
-//    sourceSets {
-//        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
-//    }
 
-//    buildTypes {
-//        release {
-//            isMinifyEnabled = false
-//        }
-//    }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//    }
 }
 
 dependencies {

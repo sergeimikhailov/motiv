@@ -4,6 +4,7 @@ plugins {
     alias libs.plugins.ksp
     alias libs.plugins.hilt
     alias libs.plugins.gms
+    alias libs.plugins.room
 }
 
 android {
@@ -20,9 +21,9 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
+    }
+    room {
+        schemaDirectory "$projectDir/schemas"
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
