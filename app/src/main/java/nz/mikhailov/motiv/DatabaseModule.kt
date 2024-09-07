@@ -43,9 +43,5 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideLegacyWeightRecordDataStore(database: MotivRoomDatabase) = database.legacyWeightRecordDao()
-
-    @Provides
-    @Singleton
     fun provideWeightRecordDataStore(database: WeightDatabase) = database.weightRecordDao()
 }

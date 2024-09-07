@@ -3,6 +3,8 @@ package nz.mikhailov.motiv.database
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase.CONFLICT_NONE
 import androidx.core.database.getStringOrNull
+import androidx.room.DeleteTable
+import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import java.time.Instant
@@ -68,3 +70,6 @@ val MIGRATION_3_4 = object : Migration(3, 4) {
         execSQL("ALTER TABLE transactions_4 RENAME TO transactions")
     }
 }
+
+@DeleteTable.Entries(DeleteTable(tableName = "weight"))
+internal class Migration5To6: AutoMigrationSpec
