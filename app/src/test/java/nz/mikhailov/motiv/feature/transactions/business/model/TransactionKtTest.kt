@@ -1,6 +1,6 @@
 package nz.mikhailov.motiv.feature.transactions.business.model
 
-import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
+import nz.mikhailov.motiv.data.transactions.TransactionRecord
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.time.LocalDateTime.parse

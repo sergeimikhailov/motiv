@@ -1,6 +1,7 @@
 package nz.mikhailov.motiv.feature.transactions.data
 
-import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
+import nz.mikhailov.motiv.data.transactions.LocalTransactionDataStore
+import nz.mikhailov.motiv.data.transactions.TransactionRecord
 import javax.inject.Inject
 
 class TransactionRepository @Inject constructor(

@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.database
+package nz.mikhailov.motiv.data.transactions
 
 import androidx.core.database.getStringOrNull
 import androidx.room.testing.MigrationTestHelper
@@ -21,7 +21,7 @@ class MigrationsTest {
     @get:Rule
     val helper: MigrationTestHelper = MigrationTestHelper(
         InstrumentationRegistry.getInstrumentation(),
-        MotivRoomDatabase::class.java.canonicalName,
+        TransactionsDatabase::class.java.canonicalName,
         FrameworkSQLiteOpenHelperFactory()
     )
 

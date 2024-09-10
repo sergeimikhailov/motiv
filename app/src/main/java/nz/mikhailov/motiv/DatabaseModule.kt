@@ -7,10 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import nz.mikhailov.motiv.data.transactions.MIGRATION_1_2
+import nz.mikhailov.motiv.data.transactions.MIGRATION_3_4
+import nz.mikhailov.motiv.data.transactions.TransactionsDatabase
 import nz.mikhailov.motiv.data.weight.WeightDatabase
-import nz.mikhailov.motiv.database.MIGRATION_1_2
-import nz.mikhailov.motiv.database.MIGRATION_3_4
-import nz.mikhailov.motiv.database.MotivRoomDatabase
 import javax.inject.Singleton
 
 @Module
@@ -22,8 +22,8 @@ object DatabaseModule {
     fun providesMotivRoomDatabase(@ApplicationContext context: Context) = Room
         .databaseBuilder(
             context.applicationContext,
-            MotivRoomDatabase::class.java,
-            "motiv_database")
+            TransactionsDatabase::class.java,
+            "motiv_database") // historic reasons
         .addMigrations(MIGRATION_1_2)
         .addMigrations(MIGRATION_3_4)
         .build()
@@ -39,7 +39,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTransactionDataStore(database: MotivRoomDatabase) = database.transactionRecordDao()
+    fun provideTransactionDataStore(database: TransactionsDatabase) = database.transactionRecordDao()
 
     @Provides
     @Singleton

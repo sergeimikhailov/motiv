@@ -1,9 +1,9 @@
 package nz.mikhailov.motiv.feature.transactions.business
 
 import kotlinx.coroutines.flow.map
+import nz.mikhailov.motiv.data.transactions.TransactionRecord
 import nz.mikhailov.motiv.feature.transactions.business.model.toBo
 import nz.mikhailov.motiv.feature.transactions.data.TransactionRepository
-import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 import javax.inject.Inject
 
 class GetLatestTransactionsUseCase @Inject constructor(

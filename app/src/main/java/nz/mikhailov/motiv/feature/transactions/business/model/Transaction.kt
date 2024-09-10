@@ -1,6 +1,6 @@
 package nz.mikhailov.motiv.feature.transactions.business.model
 
-import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
+import nz.mikhailov.motiv.data.transactions.TransactionRecord
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle

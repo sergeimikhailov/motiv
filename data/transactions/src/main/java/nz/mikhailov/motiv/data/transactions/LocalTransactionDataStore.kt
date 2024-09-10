@@ -1,11 +1,10 @@
-package nz.mikhailov.motiv.feature.transactions.data
+package nz.mikhailov.motiv.data.transactions
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import nz.mikhailov.motiv.feature.transactions.data.model.TransactionRecord
 
 @Dao
 interface LocalTransactionDataStore {

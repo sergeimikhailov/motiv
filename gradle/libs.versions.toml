@@ -7,6 +7,7 @@ androidxLifecycle = "2.6.2"
 androidxNavigation = "2.7.6"
 androidxHiltNavigationCompose = "1.1.0"
 androidxTestExt = "1.1.5"
+androidxTestRunner = "1.5.0"
 assertj = "3.21.0"
 firebaseBom = "32.7.1"
 gmsPlugin = "4.4.0"
@@ -25,6 +26,7 @@ androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name =
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycle" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }

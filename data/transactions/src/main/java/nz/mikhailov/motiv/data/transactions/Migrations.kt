@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.database
+package nz.mikhailov.motiv.data.transactions
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase.CONFLICT_NONE
