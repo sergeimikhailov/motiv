@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv
+package nz.mikhailov.motiv.data.transactions
 
 import android.content.Context
 import androidx.room.Room
@@ -7,15 +7,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import nz.mikhailov.motiv.data.transactions.MIGRATION_1_2
-import nz.mikhailov.motiv.data.transactions.MIGRATION_3_4
-import nz.mikhailov.motiv.data.transactions.TransactionsDatabase
-import nz.mikhailov.motiv.data.weight.WeightDatabase
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+object TransactionsModule {
 
     @Provides
     @Singleton
@@ -30,18 +26,5 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideWeightRoomDatabase(@ApplicationContext context: Context) = Room
-        .databaseBuilder(
-            context.applicationContext,
-            WeightDatabase::class.java,
-            "weight_database")
-        .build()
-
-    @Provides
-    @Singleton
     fun provideTransactionDataStore(database: TransactionsDatabase) = database.transactionRecordDao()
-
-    @Provides
-    @Singleton
-    fun provideWeightRecordDataStore(database: WeightDatabase) = database.weightRecordDao()
 }

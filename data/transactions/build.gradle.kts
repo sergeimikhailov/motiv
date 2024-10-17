@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.room)
 }
 
@@ -30,8 +31,9 @@ android {
 dependencies {
     implementation(project(":core:database"))
     implementation(libs.room.ktx)
-    implementation(libs.hilt.android)
     ksp(libs.room.compiler)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.assertj.core)

@@ -4,7 +4,6 @@ plugins {
     alias libs.plugins.ksp
     alias libs.plugins.hilt
     alias libs.plugins.gms
-    alias libs.plugins.room
 }
 
 android {
@@ -21,12 +20,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-    }
-    room {
-        schemaDirectory "$projectDir/schemas"
-    }
-    sourceSets {
-        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
     buildTypes {
         release {
@@ -62,7 +55,6 @@ android {
 
 dependencies {
 
-    implementation project(':core:database')
     implementation project(':data:weight')
     implementation project(':data:transactions')
     implementation platform(libs.androidx.compose.bom)
@@ -81,10 +73,6 @@ dependencies {
     debugImplementation libs.firebase.appcheck.debug
     releaseImplementation libs.firebase.appcheck.integrity
 
-    // room
-    implementation libs.room.ktx
-    ksp libs.room.compiler
-
     implementation libs.hilt.android
     ksp libs.hilt.compiler
 
@@ -100,5 +88,4 @@ dependencies {
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.ext
     androidTestImplementation libs.assertj.core
-    androidTestImplementation libs.room.testing
 }
