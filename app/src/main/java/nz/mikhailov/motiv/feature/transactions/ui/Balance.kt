@@ -6,9 +6,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nz.mikhailov.motiv.ui.theme.MotivTheme
-import nz.mikhailov.motiv.ui.theme.Typography
-import nz.mikhailov.motiv.util.formatAsCurrency
+import nz.mikhailov.motiv.core.common.formatAsCurrency
+import nz.mikhailov.motiv.core.design.theme.MotivTheme
+import nz.mikhailov.motiv.core.design.theme.Typography
 
 @Composable
 fun Balance(modifier: Modifier = Modifier, balance: Int) {

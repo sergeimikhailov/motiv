@@ -25,11 +25,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import nz.mikhailov.motiv.core.design.theme.MotivTheme
 import nz.mikhailov.motiv.feature.settings.ui.SettingsScreen
 import nz.mikhailov.motiv.feature.tracker.ui.TrackerScreen
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
 import nz.mikhailov.motiv.ui.NavigationButton
-import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

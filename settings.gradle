@@ -15,5 +15,9 @@ dependencyResolutionManagement {
 rootProject.name = "Motiv"
 include ':app'
 include ':core:database'
-include ':data:weight'
+include ':core:design'
+include ':data:rewards'
 include ':data:transactions'
+include ':data:weight'
+include ':feature:settings'
+include ':core:common'

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import nz.mikhailov.motiv.feature.rewards.business.model.Reward
+import nz.mikhailov.motiv.data.rewards.Reward
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO

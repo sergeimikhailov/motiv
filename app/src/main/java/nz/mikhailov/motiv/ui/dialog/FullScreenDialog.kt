@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import nz.mikhailov.motiv.ui.theme.MotivTheme
+import nz.mikhailov.motiv.core.design.theme.MotivTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

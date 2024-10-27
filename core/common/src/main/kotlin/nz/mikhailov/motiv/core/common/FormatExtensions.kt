@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.util
+package nz.mikhailov.motiv.core.common
 
 import kotlin.math.abs
 

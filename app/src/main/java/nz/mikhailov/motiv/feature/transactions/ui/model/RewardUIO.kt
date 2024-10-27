@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.NoFood
 import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.vector.ImageVector
-import nz.mikhailov.motiv.feature.rewards.business.model.Reward
+import nz.mikhailov.motiv.data.rewards.Reward
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Code
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Exercise

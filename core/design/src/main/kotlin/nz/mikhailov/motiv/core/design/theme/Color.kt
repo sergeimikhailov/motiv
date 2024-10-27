@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.ui.theme
+package nz.mikhailov.motiv.core.design.theme
 
 import androidx.compose.ui.graphics.Color
 

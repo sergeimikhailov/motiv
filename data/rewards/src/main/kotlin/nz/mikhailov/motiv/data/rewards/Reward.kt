@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.rewards.business.model
+package nz.mikhailov.motiv.data.rewards
 
 sealed class Reward {
     abstract val amount: Int

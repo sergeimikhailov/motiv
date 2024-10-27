@@ -23,11 +23,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import nz.mikhailov.motiv.core.design.theme.MotivTheme
 import nz.mikhailov.motiv.feature.transactions.TransactionsViewModel
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionUIO
 import nz.mikhailov.motiv.feature.transactions.ui.model.TransactionsUIO
-import nz.mikhailov.motiv.ui.theme.MotivTheme
 
 @Composable
 fun TransactionsScreen(

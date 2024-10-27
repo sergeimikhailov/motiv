@@ -6,7 +6,7 @@ import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.NoFood
 import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.vector.ImageVector
-import nz.mikhailov.motiv.feature.rewards.business.model.Reward
+import nz.mikhailov.motiv.data.rewards.Reward
 
 sealed interface RewardUIO {
     val amount: Int

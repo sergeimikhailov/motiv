@@ -1,7 +1,7 @@
 package nz.mikhailov.motiv.feature.settings
 
 import kotlinx.coroutines.flow.Flow
-import nz.mikhailov.motiv.feature.rewards.business.model.Reward
+import nz.mikhailov.motiv.data.rewards.Reward
 import nz.mikhailov.motiv.feature.settings.business.GetRewardsUseCase
 import javax.inject.Inject
 
