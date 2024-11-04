@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.tracker.ui
+package nz.mikhailov.motiv.feature.tracker
 
 import nz.mikhailov.motiv.data.weight.Weight
 import java.time.ZoneId

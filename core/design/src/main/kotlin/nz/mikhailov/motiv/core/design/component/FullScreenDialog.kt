@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.ui.dialog
+package nz.mikhailov.motiv.core.design.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope

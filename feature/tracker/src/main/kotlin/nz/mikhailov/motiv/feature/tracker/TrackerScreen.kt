@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.tracker.ui
+package nz.mikhailov.motiv.feature.tracker
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Column
