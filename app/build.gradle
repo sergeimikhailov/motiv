@@ -54,13 +54,10 @@ android {
 }
 
 dependencies {
-
-    implementation project(':core:common')
     implementation project(':core:design')
-    implementation project(':data:rewards')
-    implementation project(':data:transactions')
     implementation project(':feature:settings')
     implementation project(':feature:tracker')
+    implementation project(':feature:transactions')
     implementation platform(libs.androidx.compose.bom)
     implementation platform(libs.firebase.bom)
     implementation libs.androidx.compose.material // some components are missing in material3
