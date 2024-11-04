@@ -1,6 +1,6 @@
 package nz.mikhailov.motiv.feature.tracker.ui
 
-import nz.mikhailov.motiv.feature.tracker.business.Weight
+import nz.mikhailov.motiv.data.weight.Weight
 
 data class TrackerUIO(
     val dialogState: DialogState = DialogState.Result(""),

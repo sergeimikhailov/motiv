@@ -3,7 +3,7 @@ package nz.mikhailov.motiv.feature.transactions.business
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import nz.mikhailov.motiv.data.transactions.TransactionRecord
-import nz.mikhailov.motiv.feature.transactions.data.TransactionRepository
+import nz.mikhailov.motiv.data.transactions.TransactionRepository
 import java.time.Instant
 import javax.inject.Inject
 

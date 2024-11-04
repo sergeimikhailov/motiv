@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.tracker.business
+package nz.mikhailov.motiv.data.weight
 
 import java.time.Instant
 

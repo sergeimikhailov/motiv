@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.tracker.data
+package nz.mikhailov.motiv.data.weight
 
 import com.google.firebase.Firebase
 import com.google.firebase.functions.HttpsCallableReference

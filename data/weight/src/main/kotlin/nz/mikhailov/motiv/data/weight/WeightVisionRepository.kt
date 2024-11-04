@@ -1,9 +1,8 @@
-package nz.mikhailov.motiv.feature.tracker.business
+package nz.mikhailov.motiv.data.weight
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat.JPEG
 import android.util.Base64
-import nz.mikhailov.motiv.feature.tracker.data.FirebaseWeightVisionDataSource
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 

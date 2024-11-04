@@ -72,7 +72,6 @@ dependencies {
     implementation libs.androidx.navigation.compose
     implementation libs.androidx.hilt.navigation.compose
     implementation libs.firebase.analytics
-    implementation libs.firebase.function
     implementation libs.firebase.remote.config
 
     debugImplementation libs.firebase.appcheck.debug

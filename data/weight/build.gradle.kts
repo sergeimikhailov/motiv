@@ -29,6 +29,8 @@ android {
 
 dependencies {
     implementation(project(":core:database"))
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.function)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
     implementation(libs.hilt.android)
