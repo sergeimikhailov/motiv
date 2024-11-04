@@ -16,6 +16,7 @@ rootProject.name = "Motiv"
 include ':app'
 include ':core:database'
 include ':core:design'
+include ':data:photo'
 include ':data:rewards'
 include ':data:transactions'
 include ':data:weight'
