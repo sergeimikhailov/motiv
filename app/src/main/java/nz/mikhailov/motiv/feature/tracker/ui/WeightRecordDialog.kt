@@ -39,7 +39,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import nz.mikhailov.motiv.core.design.theme.MotivTheme
-import nz.mikhailov.motiv.feature.photo.business.TakePictureContract
+import nz.mikhailov.motiv.data.photo.TakePictureContract
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Loading
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Result
 import nz.mikhailov.motiv.ui.dialog.FullScreenDialog

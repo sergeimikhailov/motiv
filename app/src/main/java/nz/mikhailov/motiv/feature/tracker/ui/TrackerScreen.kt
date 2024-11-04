@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import nz.mikhailov.motiv.core.design.theme.MotivTheme
 import nz.mikhailov.motiv.core.design.theme.Typography
-import nz.mikhailov.motiv.feature.photo.business.TakePictureContract
+import nz.mikhailov.motiv.data.photo.TakePictureContract
 
 @Composable
 fun TrackerScreen(

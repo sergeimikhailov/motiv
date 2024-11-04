@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.photo.business
+package nz.mikhailov.motiv.data.photo
 
 import android.app.Activity.RESULT_OK
 import android.content.Context
@@ -9,7 +9,6 @@ import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.provider.MediaStore.EXTRA_OUTPUT
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.content.FileProvider.getUriForFile
-import nz.mikhailov.motiv.feature.photo.data.LocalPhotoDataSource
 import java.io.File
 import javax.inject.Inject
 

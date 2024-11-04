@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import nz.mikhailov.motiv.feature.photo.business.PhotoRepository
+import nz.mikhailov.motiv.data.photo.PhotoRepository
 import nz.mikhailov.motiv.feature.tracker.business.WeightRepository
 import nz.mikhailov.motiv.feature.tracker.business.WeightVisionRepository
 import nz.mikhailov.motiv.feature.tracker.ui.DialogState.Error

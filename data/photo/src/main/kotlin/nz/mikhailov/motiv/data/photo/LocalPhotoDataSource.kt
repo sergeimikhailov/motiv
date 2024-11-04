@@ -1,4 +1,4 @@
-package nz.mikhailov.motiv.feature.photo.data
+package nz.mikhailov.motiv.data.photo
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
