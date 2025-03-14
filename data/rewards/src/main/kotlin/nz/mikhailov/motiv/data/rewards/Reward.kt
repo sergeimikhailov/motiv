@@ -1,10 +1,25 @@
 package nz.mikhailov.motiv.data.rewards
 
-sealed class Reward {
-    abstract val amount: Int
+data class Reward(
+    val id: String,
+    val name: String,
+    val amount: Int,
+    val icon: RewardIcon,
+)
 
-    data class Code(override val amount: Int): Reward()
-    data class Exercise(override val amount: Int): Reward()
-    data class Study(override val amount: Int): Reward()
-    data class NoJunkFood(override val amount: Int): Reward()
+enum class RewardIcon {
+    Code,
+    Exercise, 
+    Study,
+    NoJunkFood;
+
+    companion object {
+        fun fromString(value: String): RewardIcon? = when (value.lowercase()) {
+            "code" -> Code
+            "exercise" -> Exercise
+            "study" -> Study
+            "nojunkfood" -> NoJunkFood
+            else -> null
+        }
+    }
 }

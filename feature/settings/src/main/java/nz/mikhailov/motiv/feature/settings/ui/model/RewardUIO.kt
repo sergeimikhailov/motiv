@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.NoFood
 import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.vector.ImageVector
 import nz.mikhailov.motiv.data.rewards.Reward
+import nz.mikhailov.motiv.data.rewards.RewardIcon
 
 sealed interface RewardUIO {
     val amount: Int
@@ -36,9 +37,9 @@ sealed interface RewardUIO {
 
 fun List<Reward>.toUIO() = map { it.toUIO() }
 
-fun Reward.toUIO() = when (this) {
-    is Reward.Code -> RewardUIO.Code(amount)
-    is Reward.Exercise -> RewardUIO.Exercise(amount)
-    is Reward.Study -> RewardUIO.Study(amount)
-    is Reward.NoJunkFood -> RewardUIO.NoJunkFood(amount)
+fun Reward.toUIO() = when (icon) {
+    RewardIcon.Code -> RewardUIO.Code(amount)
+    RewardIcon.Exercise -> RewardUIO.Exercise(amount)
+    RewardIcon.Study -> RewardUIO.Study(amount)
+    RewardIcon.NoJunkFood -> RewardUIO.NoJunkFood(amount)
 }

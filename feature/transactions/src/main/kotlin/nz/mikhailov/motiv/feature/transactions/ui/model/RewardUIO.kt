@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.NoFood
 import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.vector.ImageVector
 import nz.mikhailov.motiv.data.rewards.Reward
+import nz.mikhailov.motiv.data.rewards.RewardIcon
 import nz.mikhailov.motiv.feature.transactions.business.model.Transaction
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Code
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO.Exercise
@@ -58,9 +59,9 @@ fun Transaction.toRewardUIO() = when (activity) {
 
 fun List<Reward>.toUIO() = map { it.toUIO() }
 
-fun Reward.toUIO() = when (this) {
-    is Reward.Code -> Code(amount)
-    is Reward.Exercise -> Exercise(amount)
-    is Reward.Study -> Study(amount)
-    is Reward.NoJunkFood -> NoJunkFood(amount)
+fun Reward.toUIO() = when (icon) {
+    RewardIcon.Code -> Code(amount)
+    RewardIcon.Exercise -> Exercise(amount)
+    RewardIcon.Study -> Study(amount)
+    RewardIcon.NoJunkFood -> NoJunkFood(amount)
 }
