@@ -22,6 +22,7 @@ object TransactionsModule {
             "motiv_database") // historic reasons
         .addMigrations(MIGRATION_1_2)
         .addMigrations(MIGRATION_3_4)
+        .addMigrations(MIGRATION_6_7)
         .build()
 
     @Provides

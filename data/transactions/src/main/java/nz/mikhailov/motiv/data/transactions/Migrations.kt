@@ -73,3 +73,14 @@ val MIGRATION_3_4 = object : Migration(3, 4) {
 
 @DeleteTable.Entries(DeleteTable(tableName = "weight"))
 internal class Migration5To6: AutoMigrationSpec
+
+val MIGRATION_6_7 = object : Migration(6, 7) {
+
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Update all existing records to convert from dollars to cents
+        db.execSQL("""
+            UPDATE transactions 
+                SET amount = amount * 100, balance = balance * 100
+            """.trimIndent())
+    }
+}

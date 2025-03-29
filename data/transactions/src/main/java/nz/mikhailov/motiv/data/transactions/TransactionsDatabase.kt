@@ -10,7 +10,7 @@ import nz.mikhailov.motiv.database.RoomDatabaseConverters
     entities = [
         TransactionRecord::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
