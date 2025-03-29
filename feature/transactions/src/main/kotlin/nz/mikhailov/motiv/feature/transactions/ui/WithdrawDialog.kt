@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun WithdrawDialog(
     modifier: Modifier = Modifier,
-    onConfirm: (Int) -> Unit,
+    onConfirm: (Double) -> Unit,
     onCancel: () -> Unit,
 ) {
     val (value, setValue) = remember { mutableStateOf("0") }
@@ -32,7 +32,7 @@ fun WithdrawDialog(
             Button(
                 modifier = Modifier
                     .semantics { contentDescription = "Confirm withdraw" },
-                onClick = { onConfirm(value.toIntOrNull() ?: 0) },
+                onClick = { onConfirm(value.toDoubleOrNull() ?: 0.0) },
             ) {
                 Text(text = "Withdraw")
             }

@@ -1,12 +1,12 @@
 package nz.mikhailov.motiv.feature.transactions.business
 
-import nz.mikhailov.motiv.data.rewards.HardcodedRewardDataSource
+import nz.mikhailov.motiv.data.rewards.RewardRepository
 import javax.inject.Inject
 
 class GetRewardsUseCase @Inject constructor(
-    private val dataSource: HardcodedRewardDataSource,
+    private val repository: RewardRepository,
 ) {
 
     operator fun invoke() =
-        dataSource.rewards
+        repository.getRewards()
 }

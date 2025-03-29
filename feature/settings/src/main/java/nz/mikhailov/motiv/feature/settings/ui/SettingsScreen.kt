@@ -99,9 +99,9 @@ fun SettingsScreenPreview() {
         Surface {
             SettingsScreenLayout(
                 rewards = listOf(
-                    RewardUIO.Exercise(1),
-                    RewardUIO.Study(2),
-                    RewardUIO.Code(3),
+                    RewardUIO.Exercise(1.0),
+                    RewardUIO.Study(2.0),
+                    RewardUIO.Code(3.0),
                 )
             )
         }

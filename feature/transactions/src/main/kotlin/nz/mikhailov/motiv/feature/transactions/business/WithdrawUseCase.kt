@@ -11,16 +11,17 @@ class WithdrawUseCase @Inject constructor(
     private val repository: TransactionRepository,
 ) {
 
-    suspend operator fun invoke(amount: Int) = withContext(Dispatchers.IO) {
+    suspend operator fun invoke(amount: Double) = withContext(Dispatchers.IO) {
         if (amount <= 0) {
             return@withContext
         }
+        val amountCents = (amount * 100).toInt()
         val balance = repository.latestTransaction()?.balance ?: 0
         repository.insert(
             TransactionRecord(
                 date = Instant.now(),
-                amount = -amount,
-                balance = balance - amount,
+                amount = -amountCents,
+                balance = balance - amountCents,
             )
         )
     }

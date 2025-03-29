@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 data class Transaction(
-    val amount: Int,
+    val amount: Double,
     val date: String,
     val activity: String? = null,
-    val balance: Int,
+    val balance: Double,
 )
 
 private val defaultFormatter: DateTimeFormatter = DateTimeFormatter
@@ -18,8 +18,8 @@ private val defaultFormatter: DateTimeFormatter = DateTimeFormatter
 
 fun TransactionRecord.toBo(formatter: DateTimeFormatter = defaultFormatter) =
     Transaction(
-        amount = amount,
+        amount = amount / 100.0,
         date = formatter.format(date),
         activity = activity,
-        balance = balance,
+        balance = balance / 100.0,
     )

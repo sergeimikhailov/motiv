@@ -17,6 +17,6 @@ class TransactionsFeature @Inject constructor(
 ) {
     fun getRewards(): Flow<List<Reward>> = getRewardsUseCase()
     fun getLatestTransactions(): Flow<List<Transaction>> = getLatestTransactionsUseCase()
-    suspend fun deposit(amount: Int, activity: String) = depositUseCase(amount, activity)
-    suspend fun withdraw(amount: Int) = withdrawUseCase(amount)
+    suspend fun deposit(amount: Double, activity: String) = depositUseCase(amount, activity)
+    suspend fun withdraw(amount: Double) = withdrawUseCase(amount)
 }

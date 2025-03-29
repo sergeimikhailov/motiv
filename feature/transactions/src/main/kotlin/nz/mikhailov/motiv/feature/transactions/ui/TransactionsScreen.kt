@@ -34,7 +34,7 @@ fun TransactionsScreen(
     modifier: Modifier = Modifier,
     viewModel: TransactionsViewModel = hiltViewModel(),
 ) {
-    val transactions by viewModel.transactions.observeAsState(TransactionsUIO(balance = 0, transactions = emptyList()))
+    val transactions by viewModel.transactions.observeAsState(TransactionsUIO(balance = 0.0, transactions = emptyList()))
     val rewards by viewModel.rewards.observeAsState(emptyList())
     val addTransaction = viewModel::deposit
     val withdraw = viewModel::withdraw
@@ -53,7 +53,7 @@ fun TransactionsScreenLayout(
     transactions: TransactionsUIO,
     rewards: List<RewardUIO>,
     addTransaction: (RewardUIO) -> Unit,
-    withdraw: (Int) -> Unit,
+    withdraw: (Double) -> Unit,
 ) {
     val showWithdrawDialog = remember { mutableStateOf(false) }
     Column(
@@ -130,15 +130,15 @@ fun TransactionsScreenPreview() {
         Surface {
             TransactionsScreenLayout(
                 rewards = listOf(
-                    RewardUIO.Code(1),
-                    RewardUIO.Exercise(1),
-                    RewardUIO.Study(2),
+                    RewardUIO.Code(1.0),
+                    RewardUIO.Exercise(1.0),
+                    RewardUIO.Study(2.0),
                 ),
                 transactions = TransactionsUIO(
-                    balance = 1,
+                    balance = 1.0,
                     transactions = listOf(
                         TransactionUIO(
-                            reward = RewardUIO.Study(1),
+                            reward = RewardUIO.Study(1.0),
                             date = "7 October 2021 at 7:31 pm",
                         )
                     ),

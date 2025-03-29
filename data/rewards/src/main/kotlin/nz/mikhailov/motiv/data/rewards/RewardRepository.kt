@@ -15,7 +15,7 @@ class RewardRepository @Inject constructor(
         return Reward(
             id = record.id,
             name = record.name,
-            amount = record.cost,
+            amount = record.cost / 100.0,
             icon = RewardIcon.fromString(record.icon) ?: return null
         )
     }

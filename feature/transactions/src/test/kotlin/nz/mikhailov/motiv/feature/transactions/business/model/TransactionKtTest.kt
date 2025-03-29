@@ -23,10 +23,10 @@ class TransactionKtTest {
         )
         val result = dataObject.toBo(testFormatter)
         assertThat(result).isEqualTo(Transaction(
-            amount = 10,
+            amount = 0.10,
             date = "2021-10-09 19:21",
             activity = "activity",
-            balance = 25,
+            balance = 0.25,
         ))
     }
 }

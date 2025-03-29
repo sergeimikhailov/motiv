@@ -10,27 +10,27 @@ import nz.mikhailov.motiv.data.rewards.Reward
 import nz.mikhailov.motiv.data.rewards.RewardIcon
 
 sealed interface RewardUIO {
-    val amount: Int
+    val amount: Double
     val icon: ImageVector
     val description: String
 
     data class Exercise(
-        override val amount: Int,
+        override val amount: Double,
         override val icon: ImageVector = Icons.Filled.FitnessCenter,
         override val description: String = "Exercise reward"): RewardUIO
 
     data class Study(
-        override val amount: Int,
+        override val amount: Double,
         override val icon: ImageVector = Icons.Filled.School,
         override val description: String = "Study reward"): RewardUIO
 
     data class Code(
-        override val amount: Int,
+        override val amount: Double,
         override val icon: ImageVector = Icons.Filled.DeveloperMode,
         override val description: String = "Coding reward"): RewardUIO
 
     data class NoJunkFood(
-        override val amount: Int,
+        override val amount: Double,
         override val icon: ImageVector = Icons.Filled.NoFood,
         override val description: String = "No junk food reward"): RewardUIO
 }

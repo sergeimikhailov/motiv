@@ -27,7 +27,7 @@ class TransactionsScreensComposeTest {
         setContent {
             MotivTheme {
                 TransactionsScreenLayout(
-                    transactions = TransactionsUIO(balance = 12, transactions = emptyList()),
+                    transactions = TransactionsUIO(balance = 12.0, transactions = emptyList()),
                     rewards = emptyList(),
                     addTransaction = {},
                     withdraw = {},
@@ -36,18 +36,18 @@ class TransactionsScreensComposeTest {
         }
         onNodeWithContentDescription("Current balance")
             .assertIsDisplayed()
-            .onChildren().assertAny(hasText("$12", substring = true))
+            .onChildren().assertAny(hasText("$12.00", substring = true))
     }
 
     @Test
     fun shouldAddBalance(): Unit = with(composeTestRule) {
         setContent {
             MotivTheme {
-                val initialState = TransactionsUIO(balance = 0, transactions = emptyList())
+                val initialState = TransactionsUIO(balance = 0.0, transactions = emptyList())
                 val (transactions, setTransactions) = remember { mutableStateOf(initialState) }
                 TransactionsScreenLayout(
                     transactions = transactions,
-                    rewards = listOf(RewardUIO.Study(amount = 2)),
+                    rewards = listOf(RewardUIO.Study(amount = 2.0)),
                     addTransaction = {
                         setTransactions(TransactionsUIO(
                             balance = transactions.balance + it.amount,
@@ -61,11 +61,11 @@ class TransactionsScreensComposeTest {
         }
 
         onNodeWithContentDescription("Current balance")
-            .onChildren().assertAny(hasText("$0"))
+            .onChildren().assertAny(hasText("$0.00"))
         onNodeWithContentDescription("Add study reward")
             .performClick()
         onNodeWithContentDescription("Current balance")
-            .onChildren().assertAny(hasText("$2"))
+            .onChildren().assertAny(hasText("$2.00"))
     }
 
     @Test
@@ -73,8 +73,8 @@ class TransactionsScreensComposeTest {
         setContent {
             MotivTheme {
                 val initialState = TransactionsUIO(
-                    balance = 10,
-                    transactions = listOf(TransactionUIO(RewardUIO.Study(10), "")),
+                    balance = 10.0,
+                    transactions = listOf(TransactionUIO(RewardUIO.Study(10.0), "")),
                 )
                 val (transactions, setTransactions) = remember { mutableStateOf(initialState) }
                 TransactionsScreenLayout(
@@ -93,7 +93,7 @@ class TransactionsScreensComposeTest {
         }
 
         onNodeWithContentDescription("Current balance")
-            .onChildren().assertAny(hasText("$10"))
+            .onChildren().assertAny(hasText("$10.00"))
         onNodeWithContentDescription("Withdraw")
             .performClick()
         onNodeWithContentDescription("Amount to withdraw")
@@ -101,6 +101,6 @@ class TransactionsScreensComposeTest {
         onNodeWithContentDescription("Confirm withdraw")
             .performClick()
         onNodeWithContentDescription("Current balance")
-            .onChildren().assertAny(hasText("$3"))
+            .onChildren().assertAny(hasText("$3.00"))
     }
 }

@@ -34,7 +34,7 @@ class TransactionsViewModel @Inject constructor(
         }
     }
 
-    fun withdraw(amount: Int) {
+    fun withdraw(amount: Double) {
         viewModelScope.launch {
             feature.withdraw(amount)
         }

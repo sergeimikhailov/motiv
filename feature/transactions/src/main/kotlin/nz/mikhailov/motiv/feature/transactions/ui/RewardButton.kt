@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nz.mikhailov.motiv.core.common.formatAsCurrency
 import nz.mikhailov.motiv.feature.transactions.ui.model.RewardUIO
 import nz.mikhailov.motiv.core.design.theme.MotivTheme
 
@@ -23,7 +24,7 @@ fun RewardButton(
         onClick = { onClick(reward) },
     ) {
         Icon(reward.icon, contentDescription = null)
-        Text(text = "Add $${reward.amount}", Modifier.padding(start = 8.dp))
+        Text(text = "Add ${reward.amount.formatAsCurrency()}", Modifier.padding(start = 8.dp))
     }
 }
 
@@ -33,7 +34,7 @@ fun RewardButtonPreview() {
     MotivTheme {
         Surface {
             RewardButton(
-                reward = RewardUIO.Exercise(1),
+                reward = RewardUIO.Exercise(1.0),
                 onClick = {},
             )
         }

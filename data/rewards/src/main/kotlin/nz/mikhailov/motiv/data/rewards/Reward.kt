@@ -3,7 +3,7 @@ package nz.mikhailov.motiv.data.rewards
 data class Reward(
     val id: String,
     val name: String,
-    val amount: Int,
+    val amount: Double,
     val icon: RewardIcon,
 )
 
@@ -14,11 +14,11 @@ enum class RewardIcon {
     NoJunkFood;
 
     companion object {
-        fun fromString(value: String): RewardIcon? = when (value.lowercase()) {
-            "code" -> Code
-            "exercise" -> Exercise
-            "study" -> Study
-            "nojunkfood" -> NoJunkFood
+        fun fromString(value: String) = when (value) {
+            "Filled.DeveloperMode" -> Code
+            "Filled.FitnessCenter" -> Exercise
+            "Filled.School" -> Study
+            "Filled.NoFood" -> NoJunkFood
             else -> null
         }
     }

@@ -11,7 +11,7 @@ import nz.mikhailov.motiv.core.design.theme.MotivTheme
 import nz.mikhailov.motiv.core.design.theme.Typography
 
 @Composable
-fun Balance(modifier: Modifier = Modifier, balance: Int) {
+fun Balance(modifier: Modifier = Modifier, balance: Double) {
     Row(
         modifier = modifier,
     ) {
@@ -25,7 +25,7 @@ fun Balance(modifier: Modifier = Modifier, balance: Int) {
 fun BalancePreview() {
     MotivTheme {
         Surface {
-            Balance(balance = 10)
+            Balance(balance = 10.0)
         }
     }
 }
