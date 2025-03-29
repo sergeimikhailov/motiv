@@ -15,8 +15,8 @@ fun Balance(modifier: Modifier = Modifier, balance: Double) {
     Row(
         modifier = modifier,
     ) {
-        Text("Total is: ", style = Typography.displayLarge)
-        Text(balance.formatAsCurrency(), style = Typography.displayLarge)
+        Text("Total is: ", style = Typography.displayMedium)
+        Text(balance.formatAsCurrency(), style = Typography.displayMedium)
     }
 }
 
