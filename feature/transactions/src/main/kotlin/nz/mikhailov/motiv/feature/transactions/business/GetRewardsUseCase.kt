@@ -7,6 +7,5 @@ class GetRewardsUseCase @Inject constructor(
     private val repository: RewardRepository,
 ) {
 
-    operator fun invoke() =
-        repository.getRewards()
+    operator fun invoke() = repository.rewards
 }

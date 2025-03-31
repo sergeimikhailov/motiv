@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RewardRepository @Inject constructor(
-    private val localRewardDataStore: LocalRewardDataStore,
+    dataStore: LocalRewardDataStore,
 ) {
-    fun getRewards(): Flow<List<Reward>> = localRewardDataStore.read().map { rewardRecords ->
+    val rewards: Flow<List<Reward>> = dataStore.rewards.map { rewardRecords ->
         rewardRecords.mapNotNull(::mapToReward)
     }
 

@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LocalRewardDataStore {
 
-    @Query("SELECT * FROM rewards")
-    fun read(): Flow<List<RewardRecord>>
+    @get:Query("SELECT * FROM rewards")
+    val rewards: Flow<List<RewardRecord>>
 }

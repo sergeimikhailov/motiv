@@ -9,6 +9,5 @@ class GetRewardsUseCase @Inject constructor(
     private val repository: RewardRepository,
 ) {
 
-    operator fun invoke(): Flow<List<Reward>> =
-        repository.getRewards()
+    operator fun invoke(): Flow<List<Reward>> = repository.rewards
 }
