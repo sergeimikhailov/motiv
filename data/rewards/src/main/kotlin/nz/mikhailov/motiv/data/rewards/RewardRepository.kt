@@ -11,21 +11,11 @@ class RewardRepository @Inject constructor(
         rewardRecords.mapNotNull(::mapToReward)
     }
 
-    suspend fun create(reward: Reward): Reward? {
-        val record = mapToRewardRecord(reward)
-        val created = dataStore.create(record)
-        return mapToReward(created)
-    }
+    suspend fun create(reward: Reward) = dataStore.create(reward.toRecord())
 
-    suspend fun update(reward: Reward): Reward? {
-        val record = mapToRewardRecord(reward)
-        val updated = dataStore.update(record)
-        return mapToReward(updated)
-    }
+    suspend fun update(reward: Reward) = dataStore.update(reward.toRecord())
 
-    suspend fun delete(id: String) {
-        dataStore.delete(id)
-    }
+    suspend fun delete(id: String) = dataStore.delete(id)
 
     private fun mapToReward(record: RewardRecord): Reward? {
         return Reward(
@@ -36,12 +26,10 @@ class RewardRepository @Inject constructor(
         )
     }
     
-    private fun mapToRewardRecord(reward: Reward): RewardRecord {
-        return RewardRecord(
-            id = reward.id,
-            name = reward.name,
-            cost = (reward.amount * 100).toInt(),
-            icon = reward.icon.toString()
-        )
-    }
+    private fun Reward.toRecord() = RewardRecord(
+        id = id,
+        name = name,
+        cost = (amount * 100).toInt(),
+        icon = icon.toString()
+    )
 }

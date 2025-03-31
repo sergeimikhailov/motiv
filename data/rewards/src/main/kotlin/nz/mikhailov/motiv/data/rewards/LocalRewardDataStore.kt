@@ -14,10 +14,10 @@ interface LocalRewardDataStore {
     val rewards: Flow<List<RewardRecord>>
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun create(reward: RewardRecord): RewardRecord
+    suspend fun create(reward: RewardRecord)
     
     @Update
-    suspend fun update(reward: RewardRecord): RewardRecord
+    suspend fun update(reward: RewardRecord)
     
     @Query("DELETE FROM rewards WHERE id = :id")
     suspend fun delete(id: String)
