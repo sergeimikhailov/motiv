@@ -7,39 +7,38 @@ import androidx.compose.material.icons.filled.NoFood
 import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.vector.ImageVector
 import nz.mikhailov.motiv.data.rewards.Reward
-import nz.mikhailov.motiv.data.rewards.RewardIcon
+import nz.mikhailov.motiv.data.rewards.RewardIcon.Code
+import nz.mikhailov.motiv.data.rewards.RewardIcon.Exercise
+import nz.mikhailov.motiv.data.rewards.RewardIcon.NoJunkFood
+import nz.mikhailov.motiv.data.rewards.RewardIcon.Study
 
-sealed interface RewardUIO {
-    val amount: Double
-    val icon: ImageVector
-    val description: String
-
-    data class Exercise(
-        override val amount: Double,
-        override val icon: ImageVector = Icons.Filled.FitnessCenter,
-        override val description: String = "Exercise reward"): RewardUIO
-
-    data class Study(
-        override val amount: Double,
-        override val icon: ImageVector = Icons.Filled.School,
-        override val description: String = "Study reward"): RewardUIO
-
-    data class Code(
-        override val amount: Double,
-        override val icon: ImageVector = Icons.Filled.DeveloperMode,
-        override val description: String = "Coding reward"): RewardUIO
-
-    data class NoJunkFood(
-        override val amount: Double,
-        override val icon: ImageVector = Icons.Filled.NoFood,
-        override val description: String = "No junk food reward"): RewardUIO
-}
+data class RewardUIO(
+    val amount: Double,
+    val icon: ImageVector,
+    val description: String,
+)
 
 fun List<Reward>.toUIO() = map { it.toUIO() }
 
 fun Reward.toUIO() = when (icon) {
-    RewardIcon.Code -> RewardUIO.Code(amount)
-    RewardIcon.Exercise -> RewardUIO.Exercise(amount)
-    RewardIcon.Study -> RewardUIO.Study(amount)
-    RewardIcon.NoJunkFood -> RewardUIO.NoJunkFood(amount)
+    Code -> RewardUIO(
+        amount = amount,
+        icon = Icons.Filled.DeveloperMode,
+        description = "Coding reward",
+    )
+    Exercise -> RewardUIO(
+        amount = amount,
+        icon = Icons.Filled.FitnessCenter,
+        description = "Exercise reward",
+    )
+    Study -> RewardUIO(
+        amount = amount,
+        icon = Icons.Filled.School,
+        description = "Study reward",
+    )
+    NoJunkFood -> RewardUIO(
+        amount = amount,
+        icon = Icons.Filled.NoFood,
+        description = "No junk food reward",
+    )
 }

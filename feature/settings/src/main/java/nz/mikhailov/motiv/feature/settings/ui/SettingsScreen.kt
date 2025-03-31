@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DeveloperMode
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -99,9 +103,21 @@ fun SettingsScreenPreview() {
         Surface {
             SettingsScreenLayout(
                 rewards = listOf(
-                    RewardUIO.Exercise(1.0),
-                    RewardUIO.Study(2.0),
-                    RewardUIO.Code(3.0),
+                    RewardUIO(
+                        amount = 1.0,
+                        icon = Icons.Filled.FitnessCenter,
+                        description = "Exercise reward",
+                    ),
+                    RewardUIO(
+                        amount = 2.0,
+                        icon = Icons.Filled.School,
+                        description = "Study reward",
+                    ),
+                    RewardUIO(
+                        amount = 3.0,
+                        icon = Icons.Filled.DeveloperMode,
+                        description = "Coding reward",
+                    )
                 )
             )
         }
