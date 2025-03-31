@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.School
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +41,7 @@ fun SettingsScreen(
     SettingsScreenLayout(
         modifier = modifier,
         rewards = rewards,
+        onCreateRewardClick = {},
     )
 }
 
@@ -45,30 +49,42 @@ fun SettingsScreen(
 fun SettingsScreenLayout(
     modifier: Modifier = Modifier,
     rewards: List<RewardUIO> = emptyList(),
+    onCreateRewardClick: () -> Unit,
 ) {
-    Column(
-        modifier = modifier.padding(16.dp),
-    ) {
-        Text(
-            text = "Settings",
-            style = Typography.displayLarge,
-        )
-        Text(
-            modifier = Modifier.padding(top = 32.dp),
-            text = "Current rewards:",
-            style = MaterialTheme.typography.headlineMedium,
-        )
-        rewards.forEach {
-            Reward(
-                modifier = Modifier.padding(top = 16.dp),
-                reward = it,
-            )
+    Scaffold(
+        modifier = modifier,
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onCreateRewardClick
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Add new reward"
+                )
+            }
         }
-        Text(
-            modifier = Modifier.padding(top = 32.dp),
-            text = "* configuring rewards and their values will come in future versions",
-            style = MaterialTheme.typography.labelSmall,
-        )
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(16.dp),
+        ) {
+            Text(
+                text = "Settings",
+                style = Typography.displayLarge,
+            )
+            Text(
+                modifier = Modifier.padding(top = 32.dp),
+                text = "Current rewards:",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+            rewards.forEach {
+                Reward(
+                    modifier = Modifier.padding(top = 16.dp),
+                    reward = it,
+                )
+            }
+        }
     }
 }
 
@@ -118,7 +134,8 @@ fun SettingsScreenPreview() {
                         icon = Icons.Filled.DeveloperMode,
                         description = "Coding reward",
                     )
-                )
+                ),
+                onCreateRewardClick = {},
             )
         }
     }
