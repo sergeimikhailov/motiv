@@ -26,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
@@ -132,6 +131,7 @@ private fun AddRewardContent(
                 if (description.isNotBlank() && amountValue > 0) {
                     onSaveReward(
                         RewardUIO(
+                            id = "", // Empty ID as this is a new reward
                             amount = amountValue,
                             description = description,
                             icon = selectedIcon.icon

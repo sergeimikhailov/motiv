@@ -121,16 +121,19 @@ fun SettingsScreenPreview() {
             SettingsScreenLayout(
                 rewards = listOf(
                     RewardUIO(
+                        id = "1",
                         amount = 1.0,
                         icon = Icons.Filled.FitnessCenter,
                         description = "Exercise reward",
                     ),
                     RewardUIO(
+                        id = "2",
                         amount = 2.0,
                         icon = Icons.Filled.School,
                         description = "Study reward",
                     ),
                     RewardUIO(
+                        id = "3",
                         amount = 3.0,
                         icon = Icons.Filled.DeveloperMode,
                         description = "Coding reward",
