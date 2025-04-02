@@ -30,6 +30,6 @@ class RewardRepository @Inject constructor(
         id = id,
         name = name,
         cost = (amount * 100).toInt(),
-        icon = icon.toString()
+        icon = icon.value
     )
 }

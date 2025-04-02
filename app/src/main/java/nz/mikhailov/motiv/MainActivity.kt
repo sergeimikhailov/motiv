@@ -6,11 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -26,6 +28,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import nz.mikhailov.motiv.core.design.theme.MotivTheme
+import nz.mikhailov.motiv.feature.settings.ui.AddRewardScreen
 import nz.mikhailov.motiv.feature.settings.ui.SettingsScreen
 import nz.mikhailov.motiv.feature.tracker.TrackerScreen
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
@@ -66,6 +69,17 @@ private fun App() {
                                 }
                             }
                         },
+                        navigationIcon = {
+                            val isTransactionsScreen = "transactions" == navBackStackEntry?.destination?.route
+                            if (!isTransactionsScreen) {
+                                IconButton(onClick = { navController.popBackStack() }) {
+                                    Icon(
+                                        imageVector = Icons.Filled.ArrowBack,
+                                        contentDescription = "Navigate back"
+                                    )
+                                }
+                            }
+                        }
                     )
                 },
                 bottomBar = {
@@ -94,6 +108,18 @@ private fun App() {
                     composable("settings") {
                         SettingsScreen(
                             modifier = Modifier.padding(innerPadding),
+                            onNavigateToAddReward = {
+                                navController.navigate("settings/add_reward")
+                            },
+                        )
+                    }
+                    composable("settings/add_reward") {
+                        AddRewardScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            onSaveReward = { _ ->
+                                // Reward is saved in the AddRewardScreen
+                                navController.popBackStack()
+                            }
                         )
                     }
                     composable("tracker") {

@@ -36,12 +36,13 @@ import nz.mikhailov.motiv.feature.settings.ui.model.RewardUIO
 fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel(),
+    onNavigateToAddReward: () -> Unit = {},
 ) {
     val rewards by viewModel.rewards.observeAsState(emptyList())
     SettingsScreenLayout(
         modifier = modifier,
         rewards = rewards,
-        onCreateRewardClick = {},
+        onCreateRewardClick = onNavigateToAddReward,
     )
 }
 

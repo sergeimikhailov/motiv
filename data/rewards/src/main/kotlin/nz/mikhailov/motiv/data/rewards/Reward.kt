@@ -7,11 +7,11 @@ data class Reward(
     val icon: RewardIcon,
 )
 
-enum class RewardIcon {
-    Code,
-    Exercise, 
-    Study,
-    NoJunkFood;
+enum class RewardIcon(val value: String) {
+    Code("Filled.DeveloperMode"),
+    Exercise("Filled.FitnessCenter"), 
+    Study("Filled.School"),
+    NoJunkFood("Filled.NoFood");
 
     companion object {
         fun fromString(value: String) = when (value) {
