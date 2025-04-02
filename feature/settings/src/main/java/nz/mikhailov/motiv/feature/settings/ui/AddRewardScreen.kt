@@ -6,19 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeveloperMode
-import androidx.compose.material.icons.filled.FitnessCenter
-import androidx.compose.material.icons.filled.NoFood
-import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults.TrailingIcon
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,8 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -52,7 +38,6 @@ fun AddRewardScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddRewardContent(
     modifier: Modifier = Modifier,
@@ -61,7 +46,6 @@ private fun AddRewardContent(
     var description by remember { mutableStateOf("") }
     var amount by remember { mutableStateOf("") }
     var selectedIcon by remember { mutableStateOf(IconOption.EXERCISE) }
-    var expanded by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -74,54 +58,11 @@ private fun AddRewardContent(
             style = Typography.displayLarge,
         )
 
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = description,
-            onValueChange = { description = it },
-            label = { Text("Description") },
+        RewardForm(
+            onDescriptionChange = { description = it },
+            onAmountChange = { amount = it },
+            onIconChange = { selectedIcon = it },
         )
-        
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = amount,
-            onValueChange = { amount = it },
-            label = { Text("Amount") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-        )
-
-        ExposedDropdownMenuBox(
-            modifier = Modifier.fillMaxWidth(),
-            expanded = expanded,
-            onExpandedChange = { expanded = it }
-        ) {
-            OutlinedTextField(
-                modifier = Modifier
-                    .menuAnchor()
-                    .fillMaxWidth(),
-                value = selectedIcon.label,
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = { TrailingIcon(expanded = expanded) },
-                leadingIcon = { Icon(imageVector = selectedIcon.icon, contentDescription = null) },
-                label = { Text("Icon") }
-            )
-            
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                IconOption.entries.forEach { option ->
-                    DropdownMenuItem(
-                        text = { Text(option.label) },
-                        leadingIcon = { Icon(imageVector = option.icon, contentDescription = null) },
-                        onClick = {
-                            selectedIcon = option
-                            expanded = false
-                        }
-                    )
-                }
-            }
-        }
         
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -145,13 +86,6 @@ private fun AddRewardContent(
             Text("Save Reward")
         }
     }
-}
-
-private enum class IconOption(val icon: ImageVector, val label: String) {
-    EXERCISE(Icons.Filled.FitnessCenter, "Exercise"),
-    STUDY(Icons.Filled.School, "Study"),
-    CODE(Icons.Filled.DeveloperMode, "Coding"),
-    NO_JUNK_FOOD(Icons.Filled.NoFood, "No Junk Food")
 }
 
 @Preview(showSystemUi = true)
