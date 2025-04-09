@@ -22,4 +22,8 @@ class SettingsViewModel @Inject constructor(
     fun createReward(reward: RewardUIO) = viewModelScope.launch {
         feature.createReward(reward)
     }
+
+    fun updateReward(reward: RewardUIO) = viewModelScope.launch {
+        feature.updateReward(reward)
+    }
 }

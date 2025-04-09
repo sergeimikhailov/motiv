@@ -1,5 +1,6 @@
 package nz.mikhailov.motiv.feature.settings.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,13 +37,15 @@ import nz.mikhailov.motiv.feature.settings.ui.model.RewardUIO
 fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel(),
-    onNavigateToAddReward: () -> Unit = {},
+    onNavigateToAddReward: () -> Unit,
+    onNavigateToEditReward: (RewardUIO) -> Unit,
 ) {
     val rewards by viewModel.rewards.observeAsState(emptyList())
     SettingsScreenLayout(
         modifier = modifier,
         rewards = rewards,
         onCreateRewardClick = onNavigateToAddReward,
+        onEditRewardClick = onNavigateToEditReward,
     )
 }
 
@@ -51,6 +54,7 @@ fun SettingsScreenLayout(
     modifier: Modifier = Modifier,
     rewards: List<RewardUIO> = emptyList(),
     onCreateRewardClick: () -> Unit,
+    onEditRewardClick: (RewardUIO) -> Unit,
 ) {
     Scaffold(
         modifier = modifier,
@@ -79,10 +83,11 @@ fun SettingsScreenLayout(
                 text = "Current rewards:",
                 style = MaterialTheme.typography.headlineMedium,
             )
-            rewards.forEach {
+            rewards.forEach { reward ->
                 Reward(
                     modifier = Modifier.padding(top = 16.dp),
-                    reward = it,
+                    reward = reward,
+                    onClick = { onEditRewardClick(reward) },
                 )
             }
         }
@@ -93,9 +98,12 @@ fun SettingsScreenLayout(
 private fun Reward(
     modifier: Modifier = Modifier,
     reward: RewardUIO,
+    onClick: () -> Unit,
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -140,6 +148,7 @@ fun SettingsScreenPreview() {
                     )
                 ),
                 onCreateRewardClick = {},
+                onEditRewardClick = {},
             )
         }
     }

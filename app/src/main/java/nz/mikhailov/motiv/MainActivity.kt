@@ -22,13 +22,16 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import nz.mikhailov.motiv.core.design.theme.MotivTheme
 import nz.mikhailov.motiv.feature.settings.ui.AddRewardScreen
+import nz.mikhailov.motiv.feature.settings.ui.EditRewardScreen
 import nz.mikhailov.motiv.feature.settings.ui.SettingsScreen
 import nz.mikhailov.motiv.feature.tracker.TrackerScreen
 import nz.mikhailov.motiv.feature.transactions.ui.TransactionsScreen
@@ -111,6 +114,9 @@ private fun App() {
                             onNavigateToAddReward = {
                                 navController.navigate("settings/add_reward")
                             },
+                            onNavigateToEditReward = { reward ->
+                                navController.navigate("settings/edit_reward/${reward.id}")
+                            },
                         )
                     }
                     composable("settings/add_reward") {
@@ -120,6 +126,22 @@ private fun App() {
                                 // Reward is saved in the AddRewardScreen
                                 navController.popBackStack()
                             }
+                        )
+                    }
+                    composable(
+                        route = "settings/edit_reward/{rewardId}",
+                        arguments = listOf(
+                            navArgument("rewardId") {
+                                type = NavType.StringType
+                            }
+                        )
+                    ) { backStackEntry ->
+                        val rewardId = backStackEntry.arguments?.getString("rewardId") ?: ""
+                        
+                        EditRewardScreen(
+                            modifier = Modifier.padding(innerPadding),
+                            rewardId = rewardId,
+                            onBack = { navController.popBackStack() },
                         )
                     }
                     composable("tracker") {

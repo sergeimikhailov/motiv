@@ -26,24 +26,27 @@ fun Reward.toUIO() = when (icon) {
         id = id,
         amount = amount,
         icon = Icons.Filled.DeveloperMode,
-        description = "Coding reward",
+        description = name,
     )
     Exercise -> RewardUIO(
         id = id,
         amount = amount,
         icon = Icons.Filled.FitnessCenter,
-        description = "Exercise reward",
+        description = name,
     )
     Study -> RewardUIO(
         id = id,
         amount = amount,
         icon = Icons.Filled.School,
-        description = "Study reward",
+        description = name,
     )
     NoJunkFood -> RewardUIO(
         id = id,
         amount = amount,
         icon = Icons.Filled.NoFood,
-        description = "No junk food reward",
+        description = name,
     )
 }
+
+fun List<RewardUIO>.getRewardById(id: String): RewardUIO? =
+    find { it.id == id }
