@@ -2,11 +2,13 @@ package nz.mikhailov.motiv.feature.settings.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,6 +44,10 @@ fun EditRewardScreen(
             onSaveReward = { updatedReward ->
                 viewModel.updateReward(updatedReward)
                 onBack()
+            },
+            onDeleteReward = { id ->
+                viewModel.deleteReward(id)
+                onBack()
             }
         )
     }
@@ -52,6 +58,7 @@ private fun EditRewardContent(
     modifier: Modifier = Modifier,
     initialReward: RewardUIO,
     onSaveReward: (RewardUIO) -> Unit,
+    onDeleteReward: (String) -> Unit,
 ) {
     var description by remember { mutableStateOf(initialReward.description) }
     var amount by remember { mutableStateOf(initialReward.amount.toString()) }
@@ -82,24 +89,36 @@ private fun EditRewardContent(
         
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = {
-                val amountValue = amount.toDoubleOrNull() ?: 0.0
-                if (description.isNotBlank() && amountValue > 0) {
-                    onSaveReward(
-                        RewardUIO(
-                            id = initialReward.id,
-                            amount = amountValue,
-                            description = description,
-                            icon = selectedIcon.icon
-                        )
-                    )
-                }
-            },
-            enabled = description.isNotBlank() && (amount.toDoubleOrNull() ?: 0.0) > 0,
-            modifier = Modifier.fillMaxWidth()
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text("Update Reward")
+            Button(
+                onClick = {
+                    val amountValue = amount.toDoubleOrNull() ?: 0.0
+                    if (description.isNotBlank() && amountValue > 0) {
+                        onSaveReward(
+                            RewardUIO(
+                                id = initialReward.id,
+                                amount = amountValue,
+                                description = description,
+                                icon = selectedIcon.icon
+                            )
+                        )
+                    }
+                },
+                enabled = description.isNotBlank() && (amount.toDoubleOrNull() ?: 0.0) > 0,
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Update Reward")
+            }
+            
+            OutlinedButton(
+                onClick = { onDeleteReward(initialReward.id) },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Delete Reward")
+            }
         }
     }
 }
@@ -117,7 +136,8 @@ fun EditRewardScreenPreview() {
                     description = "Exercise for 30min",
                     icon = IconOption.EXERCISE.icon,
                 ),
-                onSaveReward = {}
+                onSaveReward = {},
+                onDeleteReward = {}
             )
         }
     }
