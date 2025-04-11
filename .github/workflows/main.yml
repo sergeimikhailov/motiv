@@ -34,3 +34,6 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew lint testDebug connectedDebugAndroidTest
+
+      - name: app distribution
+        run: ./gradlew assembleDebug appDistributionUploadDebug

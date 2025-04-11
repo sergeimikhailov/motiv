@@ -9,6 +9,7 @@ androidxHiltNavigationCompose = "1.1.0"
 androidxTestExt = "1.1.5"
 androidxTestRunner = "1.5.0"
 assertj = "3.21.0"
+firebaseAppdistribution = "5.1.1"
 firebaseBom = "32.7.1"
 gmsPlugin = "4.4.0"
 junit4 = "4.13.2"
@@ -50,9 +51,10 @@ room-testing = { group = "androidx.room", name = "room-testing", version.ref = "
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppdistribution" }
 gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

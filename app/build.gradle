@@ -1,5 +1,6 @@
 plugins {
     alias libs.plugins.android.application
+    alias libs.plugins.firebase.appdistribution
     alias libs.plugins.kotlin.android
     alias libs.plugins.ksp
     alias libs.plugins.hilt
@@ -29,6 +30,7 @@ android {
         debug {
             applicationIdSuffix ".debug"
             debuggable true
+            firebaseAppDistribution
         }
     }
     compileOptions {
