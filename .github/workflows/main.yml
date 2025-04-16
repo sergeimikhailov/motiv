@@ -29,9 +29,6 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
-      - name: App Distribution
-        run: ./gradlew assembleDebug appDistributionUploadDebug --debug --stacktrace
-
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
@@ -42,6 +39,9 @@ jobs:
           GCP_CONFIGURATION_ANDROID_DEBUG: ${{ secrets.GCP_CONFIGURATION_ANDROID_DEBUG }}
         working-directory: app
         run: echo $GCP_CONFIGURATION_ANDROID_DEBUG | base64 --decode > google-services.json
+
+      - name: App Distribution
+        run: ./gradlew assembleDebug appDistributionUploadDebug --stacktrace
 
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
