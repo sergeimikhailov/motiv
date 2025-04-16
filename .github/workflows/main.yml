@@ -29,6 +29,9 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
+      - name: App Distribution
+        run: ./gradlew assembleDebug appDistributionUploadDebug --debug --stacktrace
+
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
@@ -45,6 +48,3 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew lint testDebug connectedDebugAndroidTest
-
-      - name: app distribution
-        run: ./gradlew assembleDebug appDistributionUploadDebug
