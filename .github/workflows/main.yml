@@ -45,7 +45,9 @@ jobs:
         run: echo $GCP_CONFIGURATION_ANDROID_DEBUG | base64 --decode > google-services.json
 
       - name: Assemble Debug Build
-        run: ./gradlew assembleDebug
+        run: |
+          ./gradlew assembleDebug
+            -Pandroid.injected.version.name=${GITHUB_SHA::7}
 
       - name: App Distribution
         run: |
