@@ -29,6 +29,9 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
+      - name: Setup Firebase CLI
+        run: npm install --global firebase-tools
+
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
@@ -40,8 +43,14 @@ jobs:
         working-directory: app
         run: echo $GCP_CONFIGURATION_ANDROID_DEBUG | base64 --decode > google-services.json
 
+      - name: Assemble Debug Build
+        run: ./gradlew assembleDebug
+
       - name: App Distribution
-        run: ./gradlew assembleDebug appDistributionUploadDebug --stacktrace
+        run: |
+          firebase appdistribution:distribute \
+            ./app/build/outputs/apk/debug/app-debug.apk \
+            --app ${{ secrets.FIREBASE_APP_ID_DEBUG }}
 
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
