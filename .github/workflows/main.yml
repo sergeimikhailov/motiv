@@ -46,7 +46,7 @@ jobs:
 
       - name: Assemble Debug Build
         run: |
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug \
             -Pandroid.injected.version.name=${GITHUB_SHA::7}
 
       - name: App Distribution
