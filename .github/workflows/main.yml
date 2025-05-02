@@ -8,7 +8,15 @@ on:
   workflow_dispatch:
   workflow_call:
     secrets:
+      GCP_PROJECT_ID:
+        required: true
+      GCP_WORKLOAD_IDENTITY_PROVIDER:
+        required: true
+      GCP_WORKLOAD_IDENTITY_SERVICE_ACCOUNT:
+        required: true
       GCP_CONFIGURATION_ANDROID_DEBUG:
+        required: true
+      FIREBASE_APP_ID_DEBUG:
         required: true
 
 jobs:

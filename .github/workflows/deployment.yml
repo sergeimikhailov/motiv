@@ -9,7 +9,11 @@ jobs:
   test:
     uses: sergeimikhailov/motiv/.github/workflows/main.yml@main
     secrets:
+      GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+      GCP_WORKLOAD_IDENTITY_SERVICE_ACCOUNT: ${{ secrets.GCP_WORKLOAD_IDENTITY_SERVICE_ACCOUNT }}
       GCP_CONFIGURATION_ANDROID_DEBUG: ${{ secrets.GCP_CONFIGURATION_ANDROID_DEBUG }}
+      FIREBASE_APP_ID_DEBUG: ${{ secrets.FIREBASE_APP_ID_DEBUG }}
 
   deploy:
     needs: test
