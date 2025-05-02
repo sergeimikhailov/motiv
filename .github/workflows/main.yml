@@ -54,7 +54,7 @@ jobs:
           firebase appdistribution:distribute \
             ./app/build/outputs/apk/debug/app-debug.apk \
             --app ${{ secrets.FIREBASE_APP_ID_DEBUG }} \
-            --test-case-ids-file test-case-ids.txt
+            --test-case-ids-file ./test-case-ids.txt
 
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
