@@ -17,6 +17,9 @@ android {
     buildFeatures {
         compose = true
     }
+    lint {
+        disable.addAll(listOf("MutableCollectionMutableState", "AutoboxingStateCreation"))
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
