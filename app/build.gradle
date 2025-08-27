@@ -2,18 +2,19 @@ plugins {
     alias libs.plugins.android.application
     alias libs.plugins.firebase.appdistribution
     alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.compose
     alias libs.plugins.ksp
     alias libs.plugins.hilt
     alias libs.plugins.gms
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "nz.mikhailov.motiv"
         minSdk 26
-        targetSdk 34
+        targetSdk 35
         versionCode findProperty("android.injected.version.code") as Integer ?: 1
         versionName findProperty("android.injected.version.name") ?: "1.0"
 
@@ -42,9 +43,6 @@ android {
     }
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidxComposeCompiler.get().toString()
     }
     packagingOptions {
         resources {

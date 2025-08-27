@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "nz.mikhailov.motiv.data.rewards"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26
