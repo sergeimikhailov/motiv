@@ -72,10 +72,9 @@ jobs:
         run: |
           firebase appdistribution:distribute \
             ./app/build/outputs/apk/debug/app-debug.apk \
-            --app ${{ secrets.FIREBASE_APP_ID_DEBUG }}
-      # TODO: Re-enable Firebase robo tests when they're working
-      #       --test-devices "model=MediumPhone.arm,version=34,locale=en,orientation=portrait" \
-      #       --test-case-ids-file ./test-case-ids.txt
+            --app ${{ secrets.FIREBASE_APP_ID_DEBUG }} \
+            --test-devices "model=MediumPhone.arm,version=34,locale=en,orientation=portrait" \
+            --test-case-ids-file ./test-case-ids.txt
 
       - name: Enable KVM group perms
         run: |
