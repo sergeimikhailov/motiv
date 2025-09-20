@@ -16,3 +16,4 @@ local.properties
 google-services.json
 firebase-debug.log
 .devcontainer
+.kotlin
