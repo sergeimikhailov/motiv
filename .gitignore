@@ -17,3 +17,8 @@ google-services.json
 firebase-debug.log
 .devcontainer
 .kotlin
+
+# Claude Code
+.claude/
+CLAUDE.md
+docs/
