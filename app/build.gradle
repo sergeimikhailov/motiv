@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "nz.mikhailov.motiv"
         minSdk 26
-        targetSdk 35
+        targetSdk 36
         versionCode findProperty("android.injected.version.code") as Integer ?: 1
         versionName findProperty("android.injected.version.name") ?: "1.0"
 

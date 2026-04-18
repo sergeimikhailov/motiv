@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "nz.mikhailov.motiv.core.design"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 26
